@@ -65,6 +65,9 @@ public class Main extends JFrame {
         SecondTab SecondTab = new SecondTab();
         SecondTab.create(secondTab);
 
+        ThirdTab ThirdTab = new ThirdTab();
+        ThirdTab.create(thirdTab);
+
         JPanel sideBar = new JPanel();
         sideBar.setPreferredSize(new Dimension(200, 100));
         sideBar.setBackground(Color.darkGray);

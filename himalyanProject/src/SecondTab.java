@@ -85,7 +85,6 @@ public class SecondTab {
         ResultSet result = stmt.executeQuery();
         if (result.next()) {
             // Retrieve the values from the result set
-            String value1 = result.getString("fid");
             String value2 = result.getString("10per");
             String value3 = result.getString("12per");
             String value4 = result.getString("stream");
