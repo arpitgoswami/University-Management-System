@@ -21,6 +21,7 @@ public class Main extends JFrame {
                     Main frame = new Main();
                     frame.setVisible(true);
                     frame.setTitle("Management System");
+                    frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
                     FileMenu FileMenu = new FileMenu();
                     FileMenu.create(frame);
@@ -38,7 +39,7 @@ public class Main extends JFrame {
     public Main() throws SQLException {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(width, width, 1050, 725);
+        setBounds(width, width, 1200, 800);
 
         JTabbedPane tabbedPane = new JTabbedPane();
 

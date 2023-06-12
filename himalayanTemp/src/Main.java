@@ -1,87 +1,60 @@
-import javax.swing.*;
 import java.awt.*;
+import java.awt.print.*;
+import javax.swing.JTable;
 
-public class Main {
+public class Main implements Printable {
 
-    public static JPanel panel = new JPanel();
+    private JTable table;
+
+    public Main(JTable table) {
+        this.table = table;
+    }
+
+    @Override
+    public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
+        if (pageIndex >= 1) {
+            return Printable.NO_SUCH_PAGE;
+        }
+
+        Graphics2D g2d = (Graphics2D) graphics;
+        g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
+
+        // Calculate the total width and height of the table
+        int tableWidth = table.getColumnModel().getTotalColumnWidth();
+        int tableHeight = table.getRowHeight() * table.getRowCount();
+
+        // Calculate the scale factor to fit the table within the page bounds
+        double scaleX = pageFormat.getImageableWidth() / tableWidth;
+        double scaleY = pageFormat.getImageableHeight() / tableHeight;
+        double scale = Math.min(scaleX, scaleY);
+
+        // Apply the scaling transformation
+        g2d.scale(scale, scale);
+
+        // Print the table
+        table.print(g2d);
+
+        return Printable.PAGE_EXISTS;
+    }
+
+    public void printTable() {
+        PrinterJob printerJob = PrinterJob.getPrinterJob();
+        printerJob.setPrintable(this);
+
+        if (printerJob.printDialog()) {
+            try {
+                printerJob.print();
+            } catch (PrinterException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setPreferredSize(new Dimension(800,400));
+        // Assuming you have a JTable named "table"
+        JTable table = new JTable();
 
-        panel.setLayout(new GridLayout(9, 4));
-
-        panel.add(new JLabel("ID Number"));
-        JTextField fid = new JTextField();
-        panel.add(fid);
-
-        panel.add(new JLabel("10 Percentage"));
-        JTextField per10 = new JTextField();
-        panel.add(per10);
-
-        panel.add(new JLabel("12 Percentage"));
-        JTextField per12 = new JTextField();
-        panel.add(per12);
-
-        panel.add(new JLabel("Stream"));
-        JTextField stream = new JTextField();
-        panel.add(stream);
-
-        panel.add(new JLabel("Graduation"));
-        JTextField graduation = new JTextField();
-        panel.add(graduation);
-
-        panel.add(new JLabel("Graduation Percentage"));
-        JTextField gradper = new JTextField();
-        panel.add(gradper);
-
-        panel.add(new JLabel("Scholarship"));
-        JTextField sholarship = new JTextField();
-        panel.add(sholarship);
-
-        panel.add(new JLabel("Gender"));
-        JTextField gender = new JTextField();
-        panel.add(gender);
-
-        panel.add(new JLabel("Address"));
-        JTextField address = new JTextField();
-        panel.add(address);
-
-        panel.add(new JLabel("District"));
-        JTextField distt = new JTextField();
-        panel.add(distt);
-
-        panel.add(new JLabel("Panchayat"));
-        JTextField panchayat = new JTextField();
-        panel.add(panchayat);
-
-        panel.add(new JLabel("School"));
-        JTextField school = new JTextField();
-        panel.add(school);
-
-        panel.add(new JLabel("Aadhar Number"));
-        JTextField adhar = new JTextField();
-        panel.add(adhar);
-
-        panel.add(new JLabel("Counsellor"));
-        JTextField counsellor = new JTextField();
-        panel.add(counsellor);
-
-        panel.add(new JLabel("Time Stamp"));
-        JTextField timestamp = new JTextField();
-        panel.add(timestamp);
-
-        panel.add(new JLabel("University Interest"));
-        JTextField hcat = new JTextField();
-        panel.add(hcat);
-
-        JButton submit = new JButton("Save Details");
-        panel.add(submit);
-
-        frame.add(panel, BorderLayout.CENTER);
-        frame.setVisible(true);
-        frame.pack();
-
+        Main jTablePrinter = new Main(table);
+        jTablePrinter.printTable();
     }
 }

@@ -242,7 +242,7 @@ public class SecondTab {
         // Database Log
         String url = "jdbc:mysql://127.0.0.1:3306/amitdb1";
         String username = "root";
-        String password = "Ar@172530";
+        String password = "Pokhrel@0309";
 
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
