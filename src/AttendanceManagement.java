@@ -13,8 +13,8 @@ public class AttendanceManagement extends JFrame {
 
     public AttendanceManagement() {
         super("Attendance Management System");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600, 400);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setSize(1200, 800);
 
         // Create components
         notificationArea = new JTextArea();
@@ -69,7 +69,7 @@ public class AttendanceManagement extends JFrame {
         notificationArea.append("[" + timeStamp + "] " + message + "\n");
     }
 
-    public static void main(String[] args) {
+    public static void main() {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {

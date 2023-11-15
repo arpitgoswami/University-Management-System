@@ -3,21 +3,29 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 
-public class FacultyManagementSystem extends JFrame {
+public class FacultyManagement extends JFrame {
 
     private DefaultTableModel tableModel;
     private JTable facultyTable;
     private JLabel totalFacultyLabel;
     private JLabel averageExperienceLabel;
+    private final String CSV_FILE_PATH = "faculty.csv";
 
-    public FacultyManagementSystem() {
+    public FacultyManagement() {
         super("Faculty Management System");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600, 400);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setSize(1200, 800);
 
         // Create table model with column names
-        tableModel = new DefaultTableModel(new Object[]{"Faculty Name", "Experience (years)"}, 0);
+        tableModel = new DefaultTableModel(new Object[]{"Faculty Name", "Experience (years)"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Set cells to be uneditable
+            }
+        };
+
         facultyTable = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(facultyTable);
 
@@ -69,6 +77,10 @@ public class FacultyManagementSystem extends JFrame {
                 editFaculty();
             }
         });
+
+        // Load faculty from CSV file on initialization
+        loadFacultyFromCSV();
+        updateDashboard();
     }
 
     private void addFaculty() {
@@ -80,6 +92,7 @@ public class FacultyManagementSystem extends JFrame {
                     int experience = Integer.parseInt(experienceString);
                     tableModel.addRow(new Object[]{name, experience});
                     updateDashboard();
+                    saveFacultyToCSV();
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(this, "Please enter a valid number for experience", "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -92,6 +105,7 @@ public class FacultyManagementSystem extends JFrame {
         if (selectedRow != -1) {
             tableModel.removeRow(selectedRow);
             updateDashboard();
+            saveFacultyToCSV();
         } else {
             JOptionPane.showMessageDialog(this, "Please select a faculty member to remove", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -109,6 +123,7 @@ public class FacultyManagementSystem extends JFrame {
                         tableModel.setValueAt(newName, selectedRow, 0);
                         tableModel.setValueAt(newExperience, selectedRow, 1);
                         updateDashboard();
+                        saveFacultyToCSV();
                     } catch (NumberFormatException ex) {
                         JOptionPane.showMessageDialog(this, "Please enter a valid number for experience", "Error", JOptionPane.ERROR_MESSAGE);
                     }
@@ -132,11 +147,40 @@ public class FacultyManagementSystem extends JFrame {
         averageExperienceLabel.setText(String.format("Average Experience: %.2f years", averageExperience));
     }
 
-    public static void main(String[] args) {
+    private void loadFacultyFromCSV() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data.length == 2) {
+                    String name = data[0];
+                    int experience = Integer.parseInt(data[1]);
+                    tableModel.addRow(new Object[]{name, experience});
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("CSV file not found. Starting with an empty list.");
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void saveFacultyToCSV() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(CSV_FILE_PATH))) {
+            for (int row = 0; row < tableModel.getRowCount(); row++) {
+                writer.write(tableModel.getValueAt(row, 0) + "," + tableModel.getValueAt(row, 1) + "\n");
+            }
+            System.out.println("Faculty data saved to CSV.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main() {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new FacultyManagementSystem().setVisible(true);
+                new FacultyManagement().setVisible(true);
             }
         });
     }

@@ -7,8 +7,8 @@ public class MainFrame extends JFrame {
 
     public MainFrame() {
         super("University Management System");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setSize(1200, 800);
 
         // Create cards to display different information
         JPanel cardPanel = new JPanel(new GridLayout(2, 2));
@@ -39,37 +39,32 @@ public class MainFrame extends JFrame {
         studentButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Perform actions for student management
-                // E.g., open a new window for student management
-                JOptionPane.showMessageDialog(MainFrame.this, "Student Management clicked!");
+                StudentManagement studentManagement = new StudentManagement();
+                studentManagement.main();
             }
         });
 
         facultyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Perform actions for faculty management
-                // E.g., open a new window for faculty management
-                JOptionPane.showMessageDialog(MainFrame.this, "Faculty Management clicked!");
+                FacultyManagement facultyManagement = new FacultyManagement();
+                facultyManagement.main();
             }
         });
 
         courseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Perform actions for course management
-                // E.g., open a new window for course management
-                JOptionPane.showMessageDialog(MainFrame.this, "Course Management clicked!");
+                CourseManagement courseManagement = new CourseManagement();
+                courseManagement.main();
             }
         });
 
         attendanceButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Perform actions for attendance management
-                // E.g., open a new window for attendance management
-                JOptionPane.showMessageDialog(MainFrame.this, "Attendance Management clicked!");
-            }
+                AttendanceManagement attendanceManagement = new AttendanceManagement();
+                attendanceManagement.main();}
         });
 
         // Set layout for the main frame

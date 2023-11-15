@@ -65,7 +65,8 @@ public class Login extends JFrame {
 
         if (authenticate(username, new String(password), role)) {
             showSuccess("Login successful as " + role);
-
+            MainFrame mainFrame = new MainFrame();
+            //mainFrame.main();
             dispose();
             // Open new window or perform actions
         } else {

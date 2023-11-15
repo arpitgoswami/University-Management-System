@@ -13,8 +13,8 @@ public class StudentManagement extends JFrame {
 
     public StudentManagement() {
         super("Student Management System");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setSize(1200, 800);
 
         // Create table model with column names
         tableModel = new DefaultTableModel(
@@ -184,7 +184,7 @@ public class StudentManagement extends JFrame {
         editStudentFrame.setVisible(true);
     }
 
-    public static void main(String[] args) {
+    public static void main() {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {

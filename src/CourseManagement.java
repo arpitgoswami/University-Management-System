@@ -4,17 +4,17 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CourseManagementSystem extends JFrame {
+public class CourseManagement extends JFrame {
 
     private DefaultTableModel tableModel;
     private JTable courseTable;
     private JLabel totalCoursesLabel;
     private JLabel averageCreditsLabel;
 
-    public CourseManagementSystem() {
+    public CourseManagement() {
         super("Course Management System");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600, 400);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setSize(1200, 800);
 
         // Create table model with column names
         tableModel = new DefaultTableModel(new Object[]{"Course Name", "Course Code", "Credits"}, 0);
@@ -139,11 +139,11 @@ public class CourseManagementSystem extends JFrame {
         averageCreditsLabel.setText(String.format("Average Credits: %.2f", averageCredits));
     }
 
-    public static void main(String[] args) {
+    public static void main() {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new CourseManagementSystem().setVisible(true);
+                new CourseManagement().setVisible(true);
             }
         });
     }
