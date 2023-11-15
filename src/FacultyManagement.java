@@ -11,7 +11,7 @@ public class FacultyManagement extends JFrame {
     private JTable facultyTable;
     private JLabel totalFacultyLabel;
     private JLabel averageExperienceLabel;
-    private final String CSV_FILE_PATH = "faculty.csv";
+    private final String CSV_FILE_PATH = "./csv/faculty.csv";
 
     public FacultyManagement() {
         super("Faculty Management System");

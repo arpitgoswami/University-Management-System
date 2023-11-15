@@ -9,7 +9,7 @@ public class StudentManagement extends JFrame {
 
     private DefaultTableModel tableModel;
     private JTable studentTable;
-    private final String CSV_FILE_PATH = "students.csv";
+    private final String CSV_FILE_PATH = "./csv/students.csv";
 
     public StudentManagement() {
         super("Student Management System");

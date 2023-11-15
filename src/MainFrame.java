@@ -69,9 +69,9 @@ public class MainFrame extends JFrame {
 
         // Set layout for the main frame
         setLayout(new BorderLayout());
-        add(cardPanel, BorderLayout.NORTH);
-        add(notificationPanel, BorderLayout.CENTER);
-        add(buttonPanel, BorderLayout.SOUTH);
+        add(buttonPanel, BorderLayout.NORTH);
+        add(cardPanel, BorderLayout.CENTER);
+        add(notificationPanel, BorderLayout.SOUTH);
     }
 
     private JPanel createCard(String title, String value) {

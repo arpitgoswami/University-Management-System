@@ -77,7 +77,7 @@ public class Login extends JFrame {
     }
 
     private boolean authenticate(String username, String password, String role) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("registration.csv"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("./csv/registration.csv"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(",");
@@ -109,7 +109,7 @@ public class Login extends JFrame {
     }
 
     private void saveRegistrationData(String username, String password, String role) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("registration.csv", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("./csv/registration.csv", true))) {
             writer.write(username + "," + password + "," + role + "\n");
             showSuccess("Registration successful!");
         } catch (IOException e) {
