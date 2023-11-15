@@ -6,17 +6,22 @@
   <component name="ChangeListManager">
     <list default="true" id="fb63453f-e9e5-42be-b924-543e99b4744c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/faculty.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Simple/Login.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/Login.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/csv/courses.csv" beforeDir="false" afterPath="$PROJECT_DIR$/courses.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/csv/faculty.csv" beforeDir="false" afterPath="$PROJECT_DIR$/faculty.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/csv/registration.csv" beforeDir="false" afterPath="$PROJECT_DIR$/registration.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/csv/students.csv" beforeDir="false" afterPath="$PROJECT_DIR$/students.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simple/MainFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/MainFrame$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simple/MainFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/MainFrame$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simple/MainFrame$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/MainFrame$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simple/MainFrame$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/MainFrame$4.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Simple/MainFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/MainFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simple/StudentManagement$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/StudentManagement$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simple/StudentManagement$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/StudentManagement$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simple/StudentManagement$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/StudentManagement$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simple/StudentManagement$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/StudentManagement$4.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Simple/StudentManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/StudentManagement.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/registration.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CourseManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CourseManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FacultyManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FacultyManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/StudentManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudentManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/students.csv" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

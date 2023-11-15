@@ -10,11 +10,39 @@ public class StudentManagement extends JFrame {
     private DefaultTableModel tableModel;
     private JTable studentTable;
     private final String CSV_FILE_PATH = "./csv/students.csv";
+    private JLabel totalStudents;
 
     public StudentManagement() {
         super("Student Management System");
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setSize(1200, 800);
+
+        setLayout(new BorderLayout());
+
+        JPanel topPanel = new JPanel();
+
+        JButton searchButton = new JButton("Search");
+        JButton refresh = new JButton("Refresh");
+        totalStudents = new JLabel("Total Students: 0");
+
+        topPanel.add(searchButton);
+        topPanel.add(refresh);
+        topPanel.add(totalStudents);
+        add(topPanel, BorderLayout.NORTH);
+
+        refresh.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               updateTotalStudents();
+            }
+        });
+
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                openSearchStudentFrame();
+            }
+        });
 
         // Create table model with column names
         tableModel = new DefaultTableModel(
@@ -32,9 +60,6 @@ public class StudentManagement extends JFrame {
         JButton addButton = new JButton("Add Student");
         JButton removeButton = new JButton("Remove Student");
         JButton editButton = new JButton("Edit Student");
-
-        // Set layout
-        setLayout(new BorderLayout());
 
         // Add components to the frame
         add(scrollPane, BorderLayout.CENTER);
@@ -82,6 +107,10 @@ public class StudentManagement extends JFrame {
         loadStudentsFromCSV();
     }
 
+    private void updateTotalStudents() {
+        totalStudents.setText("Total Students: " + tableModel.getRowCount());
+    }
+
     private void loadStudentsFromCSV() {
         try (BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH))) {
             String line;
@@ -94,6 +123,7 @@ public class StudentManagement extends JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        updateTotalStudents();
     }
 
     private void saveStudentsToCSV() {
@@ -182,6 +212,40 @@ public class StudentManagement extends JFrame {
         editStudentFrame.add(new JLabel());
         editStudentFrame.add(updateButton);
         editStudentFrame.setVisible(true);
+    }
+
+    private void openSearchStudentFrame() {
+        JFrame searchStudentFrame = new JFrame("Search Student");
+        searchStudentFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        searchStudentFrame.setSize(400, 100);
+        searchStudentFrame.setLayout(new FlowLayout());
+
+        JTextField searchField = new JTextField(20);
+        JButton searchButton = new JButton("Search");
+
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String searchTerm = searchField.getText().toLowerCase();
+                if (!searchTerm.isEmpty()) {
+                    for (int row = 0; row < tableModel.getRowCount(); row++) {
+                        for (int col = 0; col < tableModel.getColumnCount(); col++) {
+                            String cellValue = tableModel.getValueAt(row, col).toString().toLowerCase();
+                            if (cellValue.contains(searchTerm)) {
+                                studentTable.changeSelection(row, col, false, false);
+                                searchStudentFrame.dispose();
+                                return;
+                            }
+                        }
+                    }
+                    JOptionPane.showMessageDialog(searchStudentFrame, "No matching student found", "Not Found", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        });
+
+        searchStudentFrame.add(searchField);
+        searchStudentFrame.add(searchButton);
+        searchStudentFrame.setVisible(true);
     }
 
     public static void main() {

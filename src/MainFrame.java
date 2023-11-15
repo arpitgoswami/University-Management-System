@@ -25,15 +25,17 @@ public class MainFrame extends JFrame {
         notificationPanel.add(scrollPane, BorderLayout.CENTER);
 
         // Create buttons for different functionalities
-        JPanel buttonPanel = new JPanel(new GridLayout(1, 4));
+        JPanel buttonPanel = new JPanel(new GridLayout(1, 5));
         JButton studentButton = new JButton("Student Management");
         JButton facultyButton = new JButton("Faculty Management");
         JButton courseButton = new JButton("Course Management");
         JButton attendanceButton = new JButton("Attendance Management");
+        JButton feeButton = new JButton("Fee Management");
         buttonPanel.add(studentButton);
         buttonPanel.add(facultyButton);
         buttonPanel.add(courseButton);
         buttonPanel.add(attendanceButton);
+        buttonPanel.add(feeButton);
 
         // Add action listeners to the buttons
         studentButton.addActionListener(new ActionListener() {
