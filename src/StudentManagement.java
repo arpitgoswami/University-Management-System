@@ -21,7 +21,7 @@ public class StudentManagement extends JFrame {
 
         JPanel topPanel = new JPanel();
 
-        JButton searchButton = new JButton("Search");
+        JButton searchButton = new JButton("Search By Name");
         JButton refresh = new JButton("Refresh");
         totalStudents = new JLabel("Total Students: 0");
 
@@ -85,6 +85,7 @@ public class StudentManagement extends JFrame {
                 if (selectedRow != -1) {
                     tableModel.removeRow(selectedRow);
                     saveStudentsToCSV();
+                    updateTotalStudents();
                 } else {
                     JOptionPane.showMessageDialog(StudentManagement.this, "Please select a student to remove", "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -135,6 +136,7 @@ public class StudentManagement extends JFrame {
                 writer.write("\n");
             }
             System.out.println("Students saved to CSV.");
+            updateTotalStudents();
         } catch (IOException e) {
             e.printStackTrace();
         }

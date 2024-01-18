@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
 
 public class Login extends JFrame {
@@ -11,6 +9,7 @@ public class Login extends JFrame {
     private JRadioButton adminRadio;
     private JRadioButton facultyRadio;
     private JRadioButton studentRadio;
+    public String permission;
 
     public Login() {
         super("Login Interface");
@@ -66,7 +65,8 @@ public class Login extends JFrame {
         if (authenticate(username, new String(password), role)) {
             showSuccess("Login successful as " + role);
             MainFrame mainFrame = new MainFrame();
-            //mainFrame.main();
+            mainFrame.main(role);
+            permission = role;
             dispose();
             // Open new window or perform actions
         } else {

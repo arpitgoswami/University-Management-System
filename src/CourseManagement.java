@@ -6,193 +6,232 @@ import java.awt.event.ActionListener;
 import java.io.*;
 
 public class CourseManagement extends JFrame {
-
-    private DefaultTableModel tableModel;
-    private JTable courseTable;
-    private JLabel totalCoursesLabel;
-    private JLabel averageCreditsLabel;
-    private final String CSV_FILE_PATH = "./csv/courses.csv";
+    DefaultTableModel model = new DefaultTableModel();
+    private JTable studentTable;
 
     public CourseManagement() {
-        super("Course Management System");
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
+        setTitle("Student Registration Viewer");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(1200, 800);
 
-        // Create table model with column names
-        tableModel = new DefaultTableModel(new Object[]{"Course Name", "Course Code", "Credits"}, 0) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false; // Make the table uneditable
-            }
-        };
-        courseTable = new JTable(tableModel);
-        JScrollPane scrollPane = new JScrollPane(courseTable);
+        initializeComponents();
+        loadDataFromCSV("./csv/courses.csv");
+    }
 
-        // Create dashboard elements
-        totalCoursesLabel = new JLabel("Total Courses: 0");
-        averageCreditsLabel = new JLabel("Average Credits: 0");
+    private void initializeComponents() {
 
-        JButton addCourseButton = new JButton("Add Course");
-        JButton removeCourseButton = new JButton("Remove Course");
-        JButton editCourseButton = new JButton("Edit Course");
+        // Create the table with the model
+        studentTable = new JTable(model);
 
-        // Set layout
-        setLayout(new BorderLayout());
+        // Add the table to a scroll pane
+        JScrollPane scrollPane = new JScrollPane(studentTable);
 
-        // Add components to the frame
+        // Add the scroll pane to the frame
         add(scrollPane, BorderLayout.CENTER);
 
-        JPanel dashboardPanel = new JPanel();
-        dashboardPanel.setLayout(new GridLayout(2, 1));
-        dashboardPanel.add(totalCoursesLabel);
-        dashboardPanel.add(averageCreditsLabel);
+        // Add Edit and Delete buttons
+        JButton addButton = new JButton("Add Course");
+        JButton editButton = new JButton("Edit");
+        JButton deleteButton = new JButton("Delete");
 
-        add(dashboardPanel, BorderLayout.NORTH);
-
+        // Create a panel for buttons
         JPanel buttonPanel = new JPanel();
-        buttonPanel.add(addCourseButton);
-        buttonPanel.add(removeCourseButton);
-        buttonPanel.add(editCourseButton);
+        buttonPanel.add(addButton);
+        buttonPanel.add(editButton);
+        buttonPanel.add(deleteButton);
+
+        // Add the button panel to the frame
         add(buttonPanel, BorderLayout.SOUTH);
 
-        // Load existing data from CSV file
-        loadCoursesFromCSV();
+        // Add action listeners for Edit and Delete buttons
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addCourse();
+            }
+        });
 
-        // Add action listeners to the buttons
-        addCourseButton.addActionListener(e -> addCourse());
-        removeCourseButton.addActionListener(e -> removeCourse());
-        editCourseButton.addActionListener(e -> editCourse());
+        editButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = studentTable.getSelectedRow();
+                if (selectedRow != -1) {
+                    editCourse(selectedRow);
+                } else {
+                    JOptionPane.showMessageDialog(CourseManagement.this, "Please select a student to edit", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                deleteCourse();
+            }
+        });
     }
 
     private void addCourse() {
-        String name = JOptionPane.showInputDialog(this, "Enter course name:");
-        if (name != null) {
-            String code = JOptionPane.showInputDialog(this, "Enter course code:");
-            if (code != null) {
-                String creditsString = JOptionPane.showInputDialog(this, "Enter number of credits:");
-                if (creditsString != null) {
-                    try {
-                        int credits = Integer.parseInt(creditsString);
-                        tableModel.addRow(new Object[]{name, code, credits});
-                        saveCoursesToCSV();
-                        updateDashboard();
-                    } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(this, "Please enter a valid number for credits", "Error", JOptionPane.ERROR_MESSAGE);
+        JFrame addStudentFrame = new JFrame("Add Student");
+        addStudentFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        addStudentFrame.setSize(400, 300);
+        addStudentFrame.setLayout(new GridLayout(model.getColumnCount() + 1, 2));
+
+        JTextField[] fields = new JTextField[model.getColumnCount()];
+        for (int i = 0; i < fields.length; i++) {
+            addStudentFrame.add(new JLabel(model.getColumnName(i) + ":"));
+            fields[i] = new JTextField();
+            addStudentFrame.add(fields[i]);
+        }
+
+        JButton saveButton = new JButton("Save");
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String[] details = new String[fields.length];
+                for (int i = 0; i < fields.length; i++) {
+                    details[i] = fields[i].getText();
+                    if (details[i].isEmpty()) {
+                        JOptionPane.showMessageDialog(addStudentFrame, "Please fill all fields", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
                     }
                 }
+                model.addRow(details);
+                saveStudentsToCSV();
+                addStudentFrame.dispose();
             }
+        });
+
+        addStudentFrame.add(new JLabel());
+        addStudentFrame.add(saveButton);
+        addStudentFrame.setVisible(true);
+    }
+
+    private void saveStudentsToCSV() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("./csv/courses.csv"))) {
+            for (int row = 0; row < model.getRowCount(); row++) {
+                for (int col = 0; col < model.getColumnCount(); col++) {
+                    writer.write(model.getValueAt(row, col) + ",");
+                }
+                writer.write("\n");
+            }
+            System.out.println("Students saved to CSV.");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    private void removeCourse() {
-        int selectedRow = courseTable.getSelectedRow();
+    private void editCourse(int rowToEdit) {
+        JFrame editStudentFrame = new JFrame("Edit Student");
+        editStudentFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        editStudentFrame.setSize(400, 300);
+        editStudentFrame.setLayout(new GridLayout(model.getColumnCount() + 1, 2));
+
+        JTextField[] fields = new JTextField[model.getColumnCount()];
+        for (int i = 0; i < fields.length; i++) {
+            editStudentFrame.add(new JLabel(model.getColumnName(i) + ":"));
+            fields[i] = new JTextField(model.getValueAt(rowToEdit, i).toString());
+            editStudentFrame.add(fields[i]);
+        }
+
+        JButton updateButton = new JButton("Update");
+        updateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String[] details = new String[fields.length];
+                for (int i = 0; i < fields.length; i++) {
+                    details[i] = fields[i].getText();
+                    if (details[i].isEmpty()) {
+                        JOptionPane.showMessageDialog(editStudentFrame, "Please fill all fields", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                }
+                for (int i = 0; i < details.length; i++) {
+                    model.setValueAt(details[i], rowToEdit, i);
+                }
+                saveStudentsToCSV();
+                editStudentFrame.dispose();
+            }
+        });
+
+        editStudentFrame.add(new JLabel());
+        editStudentFrame.add(updateButton);
+        editStudentFrame.setVisible(true);
+    }
+
+    private void deleteCourse() {
+        int selectedRow = studentTable.getSelectedRow();
         if (selectedRow != -1) {
-            tableModel.removeRow(selectedRow);
-            saveCoursesToCSV();
-            updateDashboard();
+            DefaultTableModel model = (DefaultTableModel) studentTable.getModel();
+
+            // Remove the selected row
+            model.removeRow(selectedRow);
+
+            // Save the changes to CSV
+            saveDataToCSV("./csv/courses.csv");
         } else {
-            JOptionPane.showMessageDialog(this, "Please select a course to remove", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please select a course to delete", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private void editCourse() {
-        int selectedRow = courseTable.getSelectedRow();
-        if (selectedRow != -1) {
-            JFrame editFrame = new JFrame("Edit Course");
-            editFrame.setSize(400, 300);
-            editFrame.setLayout(new GridLayout(4, 2));
+    private void loadDataFromCSV(String csvFilePath) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
+            String line;
 
-            JLabel nameLabel = new JLabel("Course Name:");
-            JTextField nameField = new JTextField(tableModel.getValueAt(selectedRow, 0).toString());
+            DefaultTableModel model = (DefaultTableModel) studentTable.getModel();
 
-            JLabel codeLabel = new JLabel("Course Code:");
-            JTextField codeField = new JTextField(tableModel.getValueAt(selectedRow, 1).toString());
+            // Read the header and add columns to the table model
+            String[] headers = reader.readLine().split(",");
+            for (String header : headers) {
+                model.addColumn(header);
+            }
 
-            JLabel creditsLabel = new JLabel("Credits:");
-            JTextField creditsField = new JTextField(tableModel.getValueAt(selectedRow, 2).toString());
+            // Read the rest of the lines as usual
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split(",");
+                model.addRow(data);
+            }
 
-            JButton saveButton = new JButton("Save");
-            saveButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    String newName = nameField.getText();
-                    String newCode = codeField.getText();
-                    String newCreditsString = creditsField.getText();
-                    try {
-                        int newCredits = Integer.parseInt(newCreditsString);
-                        tableModel.setValueAt(newName, selectedRow, 0);
-                        tableModel.setValueAt(newCode, selectedRow, 1);
-                        tableModel.setValueAt(newCredits, selectedRow, 2);
-                        saveCoursesToCSV();
-                        updateDashboard();
-                        editFrame.dispose();
-                    } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(editFrame, "Please enter a valid number for credits", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void saveDataToCSV(String csvFilePath) {
+        try (FileWriter writer = new FileWriter(csvFilePath)) {
+            DefaultTableModel model = (DefaultTableModel) studentTable.getModel();
+
+            // Write the headers
+            for (int i = 0; i < model.getColumnCount(); i++) {
+                writer.write(model.getColumnName(i));
+                if (i < model.getColumnCount() - 1) {
+                    writer.write(",");
+                }
+            }
+            writer.write("\n");
+
+            // Write the data
+            for (int row = 0; row < model.getRowCount(); row++) {
+                for (int col = 0; col < model.getColumnCount(); col++) {
+                    writer.write(model.getValueAt(row, col).toString());
+                    if (col < model.getColumnCount() - 1) {
+                        writer.write(",");
                     }
                 }
-            });
-
-            editFrame.add(nameLabel);
-            editFrame.add(nameField);
-            editFrame.add(codeLabel);
-            editFrame.add(codeField);
-            editFrame.add(creditsLabel);
-            editFrame.add(creditsField);
-            editFrame.add(new JLabel());
-            editFrame.add(saveButton);
-
-            editFrame.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(this, "Please select a course to edit", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private void updateDashboard() {
-        int totalCourses = tableModel.getRowCount();
-        totalCoursesLabel.setText("Total Courses: " + totalCourses);
-
-        int totalCredits = 0;
-        for (int row = 0; row < tableModel.getRowCount(); row++) {
-            totalCredits += (int) tableModel.getValueAt(row, 2);
-        }
-
-        double averageCredits = totalCourses > 0 ? (double) totalCredits / totalCourses : 0;
-        averageCreditsLabel.setText(String.format("Average Credits: %.2f", averageCredits));
-    }
-
-    private void loadCoursesFromCSV() {
-        File file = new File(CSV_FILE_PATH);
-        if (file.exists()) {
-            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    String[] data = line.split(",");
-                    if (data.length == 3) {
-                        tableModel.addRow(new Object[]{data[0], data[1], Integer.parseInt(data[2])});
-                    }
-                }
-                updateDashboard();
-            } catch (IOException | NumberFormatException e) {
-                e.printStackTrace();
+                writer.write("\n");
             }
-        }
-    }
 
-    private void saveCoursesToCSV() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(CSV_FILE_PATH))) {
-            for (int row = 0; row < tableModel.getRowCount(); row++) {
-                String name = tableModel.getValueAt(row, 0).toString();
-                String code = tableModel.getValueAt(row, 1).toString();
-                String credits = tableModel.getValueAt(row, 2).toString();
-                writer.write(name + "," + code + "," + credits + "\n");
-            }
-            System.out.println("Courses saved to CSV.");
+            System.out.println("Data saved to CSV.");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public static void main() {
-        SwingUtilities.invokeLater(() -> new CourseManagement().setVisible(true));
+        SwingUtilities.invokeLater(() -> {
+            CourseManagement app = new CourseManagement();
+            app.setVisible(true);
+        });
     }
 }

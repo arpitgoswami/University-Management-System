@@ -1,0 +1,51 @@
+Student ID,Course,Fee Amount,Payment Date,Payment Status
+1,Engineering,3655.49,2022-01-23,Paid
+2,Computer Science,4344.36,2022-01-17,Paid
+3,Mathematics,1513.76,2022-01-05,Paid
+4,Physics,5226.27,2022-01-09,Paid
+5,Chemistry,1902.01,2022-01-26,Paid
+6,Biology,4292.77,2022-01-19,Paid
+7,History,2379.80,2022-01-15,Paid
+8,Economics,3093.15,2022-01-07,Paid
+9,English,4922.23,2022-01-11,Paid
+10,Psychology,1873.14,2022-01-03,Paid
+11,Political Science,1265.51,2022-01-12,Paid
+12,Sociology,3724.43,2022-01-28,Paid
+13,Geography,2687.39,2022-01-29,Paid
+14,Philosophy,1126.44,2022-01-21,Paid
+15,Art,2527.15,2022-01-14,Paid
+16,Music,1554.87,2022-01-04,Paid
+17,Drama,2786.83,2022-01-20,Paid
+18,Film Studies,5379.07,2022-01-24,Paid
+19,Physical Education,4825.92,2022-01-01,Pending
+20,Chemical Engineering,3895.62,2022-01-22,Paid
+21,Mechanical Engineering,4112.70,2022-01-10,Paid
+22,Electrical Engineering,2858.65,2022-01-27,Paid
+23,Medical Science,3556.19,2022-01-25,Paid
+24,Business Administration,2104.88,2022-01-16,Paid
+25,Marketing,3206.11,2022-01-13,Paid
+26,Finance,1436.12,2022-01-18,Paid
+27,Accounting,2067.78,2022-01-02,Paid
+28,Management,3181.25,2022-01-06,Paid
+29,Human Resources,4879.61,2022-01-08,Paid
+30,Public Relations,1740.57,2022-01-30,Paid
+31,Journalism,4957.94,2022-01-31,Paid
+32,Environmental Science,1911.32,2022-01-09,Paid
+33,Astronomy,3098.73,2022-01-05,Paid
+34,Computer Engineering,2522.68,2022-01-22,Paid
+35,Civil Engineering,3580.24,2022-01-14,Paid
+36,Software Engineering,4287.55,2022-01-27,Paid
+37,Graphic Design,1333.26,2022-01-08,Paid
+38,Architecture,3665.54,2022-01-19,Paid
+39,Psychiatry,4688.67,2022-01-23,Paid
+40,Nursing,3981.37,2022-01-12,Paid
+41,Pharmacy,3274.06,2022-01-04,Paid
+42,Biochemistry,2312.52,2022-01-26,Paid
+43,Microbiology,3195.93,2022-01-13,Paid
+44,Political Science,1757.50,2022-01-03,Paid
+45,Social Work,2813.55,2022-01-20,Paid
+46,International Relations,4130.64,2022-01-10,Paid
+47,Ethics,1244.81,2022-01-15,Paid
+48,Statistics,1671.50,2022-01-21,Paid
+49,Data Science,4622.38,2022-01-17,Paid
+50,Information Technology,3047.29,2022-01-11,Paid

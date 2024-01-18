@@ -1,7 +1,9 @@
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicSliderUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.security.Permission;
 
 public class MainFrame extends JFrame {
 
@@ -25,12 +27,13 @@ public class MainFrame extends JFrame {
         notificationPanel.add(scrollPane, BorderLayout.CENTER);
 
         // Create buttons for different functionalities
-        JPanel buttonPanel = new JPanel(new GridLayout(1, 5));
+        JPanel buttonPanel = new JPanel(new GridLayout(1, 6));
         JButton studentButton = new JButton("Student Management");
         JButton facultyButton = new JButton("Faculty Management");
         JButton courseButton = new JButton("Course Management");
         JButton attendanceButton = new JButton("Attendance Management");
         JButton feeButton = new JButton("Fee Management");
+
         buttonPanel.add(studentButton);
         buttonPanel.add(facultyButton);
         buttonPanel.add(courseButton);
@@ -69,6 +72,14 @@ public class MainFrame extends JFrame {
                 attendanceManagement.main();}
         });
 
+        feeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FeeManagement feeManagement = new FeeManagement();
+                feeManagement.main();
+            }
+        });
+
         // Set layout for the main frame
         setLayout(new BorderLayout());
         add(buttonPanel, BorderLayout.NORTH);
@@ -86,11 +97,12 @@ public class MainFrame extends JFrame {
         return card;
     }
 
-    public static void main(String[] args) {
+    public static void main(String role) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 new MainFrame().setVisible(true);
+                System.out.println(role);
             }
         });
     }
