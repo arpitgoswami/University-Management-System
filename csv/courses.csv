@@ -1,15 +1,13 @@
-
-EE101,B.Tech,Electrical Engineering,4 years,8,
-ME101,B.Tech,Mechanical Engineering,4 years,8,
-CE101,B.Tech,Civil Engineering,4 years,8,
-ChE101,B.Tech,Chemical Engineering,4 years,8,
-ECE101,B.Tech,Electronics and Communication Engineering,4 years,8,
-IT101,B.Tech,Information Technology,4 years,8,
-AE101,B.Tech,Aerospace Engineering,4 years,8,
-BT101,B.Tech,Biotechnology,4 years,8,
-EnvE101,B.Tech,Environmental Engineering,4 years,8,
-Pharm101,B.Pharm,Pharmacy,4 years,8,
-MBBS101,MBBS,Medicine,5 years,10,
-BScN101,B.Sc Nursing,Nursing,4 years,8,
-BPT101,Bachelor of Physiotherapy,Physiotherapy,4 years,8,
-fsda,afsd,fsda,fsda,fsda,
+EE101,B.Tech,Electrical Engineering,4 years,8
+ME101,B.Tech,Mechanical Engineering,4 years,8
+CE101,B.Tech,Civil Engineering,4 years,8
+ChE101,B.Tech,Chemical Engineering,4 years,8
+ECE101,B.Tech,Electronics and Communication Engineering,4 years,8
+IT101,B.Tech,Information Technology,4 years,8
+AE101,B.Tech,Aerospace Engineering,4 years,8
+BT101,B.Tech,Biotechnology,4 years,8
+EnvE101,B.Tech,Environmental Engineering,4 years,8
+Pharm101,B.Pharm,Pharmacy,4 years,8
+MBBS101,MBBS,Medicine,5 years,10
+BScN101,B.Sc Nursing,Nursing,4 years,8
+BPT101,Bachelor of Physiotherapy,Physiotherapy,4 years,8
