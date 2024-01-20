@@ -3,219 +3,182 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class CourseManagement extends JFrame {
-    DefaultTableModel model = new DefaultTableModel();
-    private JTable studentTable;
+
+    public String csvPath = "./csv/courses.csv";
+    private final NonEditableTableModel tableModel;
+    private final JTable csvTable;
 
     public CourseManagement() {
-
-        setTitle("Student Registration Viewer");
+        setTitle("Course Management");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(1200, 800);
 
+        tableModel = new NonEditableTableModel(new Object[]{}, 0);
+        csvTable = new JTable(tableModel);
+        csvTable.setRowSelectionAllowed(true);
+
         initializeComponents();
-        loadDataFromCSV("./csv/courses.csv");
+        loadDataFromCSV(csvPath);
     }
 
     private void initializeComponents() {
-
-        // Create the table with the model
-        studentTable = new JTable(model);
-
-        // Add the table to a scroll pane
-        JScrollPane scrollPane = new JScrollPane(studentTable);
-
-        // Add the scroll pane to the frame
+        JScrollPane scrollPane = new JScrollPane(csvTable);
         add(scrollPane, BorderLayout.CENTER);
 
-        // Add Edit and Delete buttons
-        JButton addButton = new JButton("Add Course");
-        JButton editButton = new JButton("Edit");
-        JButton deleteButton = new JButton("Delete");
-
-        // Create a panel for buttons
         JPanel buttonPanel = new JPanel();
-        buttonPanel.add(addButton);
-        buttonPanel.add(editButton);
-        buttonPanel.add(deleteButton);
+        addButtonToPanel(buttonPanel, "Add", this::addEntry);
+        addButtonToPanel(buttonPanel, "Delete", this::deleteSelectedRow);
+        addButtonToPanel(buttonPanel, "Edit", this::editSelectedEntry);
+        addButtonToPanel(buttonPanel, "Refresh", this::refreshTable);
 
-        // Add the button panel to the frame
+
         add(buttonPanel, BorderLayout.SOUTH);
-
-        // Add action listeners for Edit and Delete buttons
-        addButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                addCourse();
-            }
-        });
-
-        editButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int selectedRow = studentTable.getSelectedRow();
-                if (selectedRow != -1) {
-                    editCourse(selectedRow);
-                } else {
-                    JOptionPane.showMessageDialog(CourseManagement.this, "Please select a student to edit", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        });
-
-        deleteButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                deleteCourse();
-            }
-        });
     }
 
-    private void addCourse() {
-        JFrame addStudentFrame = new JFrame("Add Student");
-        addStudentFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        addStudentFrame.setSize(400, 300);
-        addStudentFrame.setLayout(new GridLayout(model.getColumnCount() + 1, 2));
-
-        JTextField[] fields = new JTextField[model.getColumnCount()];
-        for (int i = 0; i < fields.length; i++) {
-            addStudentFrame.add(new JLabel(model.getColumnName(i) + ":"));
-            fields[i] = new JTextField();
-            addStudentFrame.add(fields[i]);
-        }
-
-        JButton saveButton = new JButton("Save");
-        saveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String[] details = new String[fields.length];
-                for (int i = 0; i < fields.length; i++) {
-                    details[i] = fields[i].getText();
-                    if (details[i].isEmpty()) {
-                        JOptionPane.showMessageDialog(addStudentFrame, "Please fill all fields", "Error", JOptionPane.ERROR_MESSAGE);
-                        return;
-                    }
-                }
-                model.addRow(details);
-                saveStudentsToCSV();
-                addStudentFrame.dispose();
-            }
-        });
-
-        addStudentFrame.add(new JLabel());
-        addStudentFrame.add(saveButton);
-        addStudentFrame.setVisible(true);
+    private void addButtonToPanel(JPanel panel, String label, ActionListener listener) {
+        JButton button = new JButton(label);
+        button.addActionListener(listener);
+        panel.add(button);
     }
 
-    private void saveStudentsToCSV() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("./csv/courses.csv"))) {
-            for (int row = 0; row < model.getRowCount(); row++) {
-                for (int col = 0; col < model.getColumnCount(); col++) {
-                    writer.write(model.getValueAt(row, col) + ",");
-                }
-                writer.write("\n");
-            }
-            System.out.println("Students saved to CSV.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private void addEntry(ActionEvent actionEvent) {
+        JFrame addEntryFrame = createEntryFrame("Add Entry", true);
+        addEntryFrame.setVisible(true);
     }
 
-    private void editCourse(int rowToEdit) {
-        JFrame editStudentFrame = new JFrame("Edit Student");
-        editStudentFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        editStudentFrame.setSize(400, 300);
-        editStudentFrame.setLayout(new GridLayout(model.getColumnCount() + 1, 2));
-
-        JTextField[] fields = new JTextField[model.getColumnCount()];
-        for (int i = 0; i < fields.length; i++) {
-            editStudentFrame.add(new JLabel(model.getColumnName(i) + ":"));
-            fields[i] = new JTextField(model.getValueAt(rowToEdit, i).toString());
-            editStudentFrame.add(fields[i]);
-        }
-
-        JButton updateButton = new JButton("Update");
-        updateButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String[] details = new String[fields.length];
-                for (int i = 0; i < fields.length; i++) {
-                    details[i] = fields[i].getText();
-                    if (details[i].isEmpty()) {
-                        JOptionPane.showMessageDialog(editStudentFrame, "Please fill all fields", "Error", JOptionPane.ERROR_MESSAGE);
-                        return;
-                    }
-                }
-                for (int i = 0; i < details.length; i++) {
-                    model.setValueAt(details[i], rowToEdit, i);
-                }
-                saveStudentsToCSV();
-                editStudentFrame.dispose();
-            }
-        });
-
-        editStudentFrame.add(new JLabel());
-        editStudentFrame.add(updateButton);
-        editStudentFrame.setVisible(true);
-    }
-
-    private void deleteCourse() {
-        int selectedRow = studentTable.getSelectedRow();
+    private void editSelectedEntry(ActionEvent actionEvent) {
+        int selectedRow = csvTable.getSelectedRow();
         if (selectedRow != -1) {
-            DefaultTableModel model = (DefaultTableModel) studentTable.getModel();
-
-            // Remove the selected row
-            model.removeRow(selectedRow);
-
-            // Save the changes to CSV
-            saveDataToCSV("./csv/courses.csv");
+            JFrame editEntryFrame = createEntryFrame("Edit Entry", false);
+            populateFieldsWithRowData(editEntryFrame, selectedRow);
+            editEntryFrame.setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(this, "Please select a course to delete", "Error", JOptionPane.ERROR_MESSAGE);
+            showError("Please select a row to edit");
+        }
+    }
+
+    private JFrame createEntryFrame(String title, boolean isNewEntry) {
+        JFrame entryFrame = new JFrame(title);
+        entryFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        entryFrame.setSize(400, 300);
+        entryFrame.setLayout(new GridLayout(tableModel.getColumnCount() + 1, 2));
+
+        JTextField[] fields = new JTextField[tableModel.getColumnCount()];
+        for (int i = 0; i < fields.length; i++) {
+            entryFrame.add(new JLabel(tableModel.getColumnName(i) + ":"));
+            fields[i] = new JTextField();
+            entryFrame.add(fields[i]);
+        }
+
+        JButton saveOrUpdateButton = new JButton(isNewEntry ? "Save" : "Update");
+        saveOrUpdateButton.addActionListener(e -> {
+            String[] data = new String[fields.length];
+            for (int i = 0; i < fields.length; i++) {
+                data[i] = fields[i].getText();
+                if (data[i].isEmpty()) {
+                    showError("Please fill all fields");
+                    return;
+                }
+            }
+
+            if (isNewEntry) {
+                tableModel.addRow(data);
+            } else {
+                int selectedRow = csvTable.getSelectedRow();
+                for (int i = 0; i < data.length; i++) {
+                    tableModel.setValueAt(data[i], selectedRow, i);
+                }
+            }
+
+            saveDataToCSV(csvPath);
+            entryFrame.dispose();
+        });
+
+        entryFrame.add(new JLabel());
+        entryFrame.add(saveOrUpdateButton);
+
+        return entryFrame;
+    }
+
+    private void populateFieldsWithRowData(JFrame entryFrame, int selectedRow) {
+        JTextField[] fields = new JTextField[tableModel.getColumnCount()];
+        for (int i = 0; i < fields.length; i++) {
+            entryFrame.add(new JLabel(tableModel.getColumnName(i) + ":"));
+            fields[i] = new JTextField(tableModel.getValueAt(selectedRow, i).toString());
+            entryFrame.add(fields[i]);
         }
     }
 
     private void loadDataFromCSV(String csvFilePath) {
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
-            String line;
+            String line = reader.readLine();
 
-            DefaultTableModel model = (DefaultTableModel) studentTable.getModel();
-
-            // Read the header and add columns to the table model
-            String[] headers = reader.readLine().split(",");
-            for (String header : headers) {
-                model.addColumn(header);
+            String[] headers = line.split(",");
+            if (tableModel.getColumnCount() == 0) {
+                for (String header : headers) {
+                    tableModel.addColumn(header);
+                }
             }
 
-            // Read the rest of the lines as usual
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(",");
-                model.addRow(data);
+                tableModel.addRow(data);
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    private void deleteSelectedRow(ActionEvent actionEvent) {
+        int selectedRow = csvTable.getSelectedRow();
+        if (selectedRow != -1) {
+            String selectedCourseCode = tableModel.getValueAt(selectedRow, 0).toString();
+            int csvRowIndex = findRowIndexByCourseCode(selectedCourseCode);
+            if (csvRowIndex != -1) {
+                tableModel.removeRow(selectedRow);
+                saveDataToCSV(csvPath);
+            } else {
+                showError("Failed to find corresponding row in CSV");
+            }
+        } else {
+            showError("Please select a row to delete");
+        }
+    }
+
+    private void refreshTable(ActionEvent actionEvent) {
+        tableModel.setRowCount(0);
+        loadDataFromCSV(csvPath);
+    }
+
+    private int findRowIndexByCourseCode(String courseCode) {
+        for (int row = 0; row < tableModel.getRowCount(); row++) {
+            if (tableModel.getValueAt(row, 0).toString().equals(courseCode)) {
+                return row;
+            }
+        }
+        return -1;
+    }
+
     private void saveDataToCSV(String csvFilePath) {
         try (FileWriter writer = new FileWriter(csvFilePath)) {
-            DefaultTableModel model = (DefaultTableModel) studentTable.getModel();
-
-            // Write the headers
-            for (int i = 0; i < model.getColumnCount(); i++) {
-                writer.write(model.getColumnName(i));
-                if (i < model.getColumnCount() - 1) {
+            for (int i = 0; i < tableModel.getColumnCount(); i++) {
+                writer.write(tableModel.getColumnName(i));
+                if (i < tableModel.getColumnCount() - 1) {
                     writer.write(",");
                 }
             }
             writer.write("\n");
 
-            // Write the data
-            for (int row = 0; row < model.getRowCount(); row++) {
-                for (int col = 0; col < model.getColumnCount(); col++) {
-                    writer.write(model.getValueAt(row, col).toString());
-                    if (col < model.getColumnCount() - 1) {
+            for (int row = 0; row < tableModel.getRowCount(); row++) {
+                for (int col = 0; col < tableModel.getColumnCount(); col++) {
+                    writer.write(tableModel.getValueAt(row, col).toString());
+                    if (col < tableModel.getColumnCount() - 1) {
                         writer.write(",");
                     }
                 }
@@ -228,10 +191,26 @@ public class CourseManagement extends JFrame {
         }
     }
 
-    public static void main() {
+    private void showError(String message) {
+        JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             CourseManagement app = new CourseManagement();
             app.setVisible(true);
         });
+    }
+
+    public static class NonEditableTableModel extends DefaultTableModel {
+
+        public NonEditableTableModel(Object[] columnNames, int rowCount) {
+            super(columnNames, rowCount);
+        }
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
     }
 }

@@ -7,6 +7,17 @@
     <list default="true" id="fb63453f-e9e5-42be-b924-543e99b4744c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/csv/courses.csv" beforeDir="false" afterPath="$PROJECT_DIR$/csv/courses.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/csv/students.csv" beforeDir="false" afterPath="$PROJECT_DIR$/csv/students.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simple/MainFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/MainFrame$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simple/MainFrame$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/MainFrame$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simple/StudentManagement$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simple/StudentManagement$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simple/StudentManagement$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simple/StudentManagement$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simple/StudentManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/StudentManagement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CourseManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CourseManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/StudentManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudentManagement.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +59,13 @@
   }
 }</component>
   <component name="RunManager">
+    <configuration name="CourseManagement" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="CourseManagement" />
+      <module name="Simple" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Login" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Login" />
       <module name="Simple" />
@@ -66,5 +84,15 @@
       <updated>1699548875873</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/out/production/Simple/FeeManagement.class</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
