@@ -7,14 +7,15 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Vector;
 
 public class StudentManagement extends JFrame {
 
     public String csvPath = "./csv/students.csv";
     private final NonEditableTableModel tableModel;
     private final JTable csvTable;
-
     public boolean status;
+    private JTextField searchField;
 
     public StudentManagement() {
         setTitle("Student Management");
@@ -39,6 +40,7 @@ public class StudentManagement extends JFrame {
         addButtonToPanel(buttonPanel, "Edit", this::editSelectedEntry);
         addButtonToPanel(buttonPanel, "Refresh", this::refreshTable);
         addButtonToPanel(buttonPanel, "Print", this::printCSV);
+        addButtonToPanel(buttonPanel, "Logout", this::logout);
 
         JLabel statusLabel = new JLabel(!status? "Server Running" : "Server Failed");
         statusLabel.setForeground(Color.BLACK);
@@ -47,6 +49,55 @@ public class StudentManagement extends JFrame {
         buttonPanel.add(statusLabel);
 
         add(buttonPanel, BorderLayout.SOUTH);
+
+        searchField = new JTextField();
+        searchField.setColumns(20);
+        JButton searchButton = new JButton("Search By ID");
+        searchButton.addActionListener(this::searchData);
+
+        JTextField searchFieldm = new JTextField();
+        searchFieldm.setColumns(20);
+        JButton searchmButton = new JButton("Search By Name");
+        searchmButton.addActionListener(this::searchData);
+
+        JPanel searchPanel = new JPanel();
+        searchPanel.add(searchField);
+        searchPanel.add(searchButton);
+
+        searchPanel.add(searchFieldm);
+        searchPanel.add(searchmButton);
+
+        add(searchPanel, BorderLayout.NORTH);
+    }
+
+    private void searchData(ActionEvent actionEvent) {
+        String searchTerm = searchField.getText().toLowerCase();
+
+        if (searchTerm.isEmpty()) {
+            // If the search term is empty, refresh the table to show all data
+            refreshTable(actionEvent);
+            return;
+        }
+
+        DefaultTableModel filteredModel = new NonEditableTableModel(new Object[]{}, 0);
+
+        for (int col = 0; col < tableModel.getColumnCount(); col++) {
+            filteredModel.addColumn(tableModel.getColumnName(col));
+        }
+
+        for (int row = 0; row < tableModel.getRowCount(); row++) {
+            Object cellValue = tableModel.getValueAt(row, 0); // Assuming ID is in the first column
+            if (cellValue != null && cellValue.toString().toLowerCase().contains(searchTerm)) {
+                Vector<Object> rowData = new Vector<>();
+                for (int col = 0; col < tableModel.getColumnCount(); col++) {
+                    rowData.add(tableModel.getValueAt(row, col));
+                }
+                filteredModel.addRow(rowData);
+            }
+        }
+
+        // Update the table with the filtered model
+        csvTable.setModel(filteredModel);
     }
 
     private void addButtonToPanel(JPanel panel, String label, ActionListener listener) {
@@ -163,12 +214,20 @@ public class StudentManagement extends JFrame {
 
     private void refreshTable(ActionEvent actionEvent) {
         tableModel.setRowCount(0);
+        csvTable.setModel(tableModel);
         loadDataFromCSV(csvPath);
     }
 
     private void printCSV(ActionEvent actionEvent) {
         CsvPrinter csvPrinter = new CsvPrinter();
         csvPrinter.printCSV(csvPath);
+    }
+
+    private void logout(ActionEvent actionEvent) {
+        JOptionPane.showMessageDialog(null, "You have been successfully logged out.");
+        Login login = new Login();
+        login.setVisible(true);
+        dispose();
     }
 
     private int findRowIndexByCourseCode(String courseCode) {

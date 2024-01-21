@@ -1,6 +1,4 @@
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.print.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -22,6 +20,7 @@ public class CsvPrinter extends JFrame {
                 ex.printStackTrace();
             }
         }
+        JOptionPane.showMessageDialog(null, "The printable document is generated.");
     }
 
     private static class CSVPrintable implements Printable {

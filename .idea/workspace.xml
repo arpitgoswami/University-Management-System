@@ -8,6 +8,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/csv/students.csv" beforeDir="false" afterPath="$PROJECT_DIR$/csv/students.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Simple/StudentManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/StudentManagement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CsvPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CsvPrinter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/StudentManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudentManagement.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
