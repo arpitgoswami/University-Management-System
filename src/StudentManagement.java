@@ -38,6 +38,7 @@ public class StudentManagement extends JFrame {
         addButtonToPanel(buttonPanel, "Delete", this::deleteSelectedRow);
         addButtonToPanel(buttonPanel, "Edit", this::editSelectedEntry);
         addButtonToPanel(buttonPanel, "Refresh", this::refreshTable);
+        addButtonToPanel(buttonPanel, "Print", this::printCSV);
 
         JLabel statusLabel = new JLabel(!status? "Server Running" : "Server Failed");
         statusLabel.setForeground(Color.BLACK);
@@ -163,6 +164,11 @@ public class StudentManagement extends JFrame {
     private void refreshTable(ActionEvent actionEvent) {
         tableModel.setRowCount(0);
         loadDataFromCSV(csvPath);
+    }
+
+    private void printCSV(ActionEvent actionEvent) {
+        CsvPrinter csvPrinter = new CsvPrinter();
+        csvPrinter.printCSV(csvPath);
     }
 
     private int findRowIndexByCourseCode(String courseCode) {
