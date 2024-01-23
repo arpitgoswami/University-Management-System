@@ -3,185 +3,316 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Vector;
 
 public class FacultyManagement extends JFrame {
 
-    private DefaultTableModel tableModel;
-    private JTable facultyTable;
-    private JLabel totalFacultyLabel;
-    private JLabel averageExperienceLabel;
-    private final String CSV_FILE_PATH = "./csv/faculty.csv";
+    public String csvPath = "./csv/faculty.csv";
+    private NonEditableTableModel tableModel;
+    private JTable csvTable;
+    private JTextField searchField;
+    private JTextField searchNameField;
 
     public FacultyManagement() {
-        super("Faculty Management System");
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Student Management");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(1200, 800);
 
-        // Create table model with column names
-        tableModel = new DefaultTableModel(new Object[]{"Faculty Name", "Experience (years)"}, 0) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false; // Set cells to be uneditable
-            }
-        };
+        tableModel = new NonEditableTableModel(new Object[]{}, 0);
+        csvTable = new JTable(tableModel);
+        csvTable.setRowSelectionAllowed(true);
 
-        facultyTable = new JTable(tableModel);
-        JScrollPane scrollPane = new JScrollPane(facultyTable);
+        initializeComponents();
+        loadDataFromCSV(csvPath);
+    }
 
-        // Create dashboard elements
-        totalFacultyLabel = new JLabel("Total Faculty: 0");
-        averageExperienceLabel = new JLabel("Average Experience: 0 years");
-
-        JButton addFacultyButton = new JButton("Add Faculty");
-        JButton removeFacultyButton = new JButton("Remove Faculty");
-        JButton editFacultyButton = new JButton("Edit Faculty");
-
-        // Set layout
-        setLayout(new BorderLayout());
-
-        // Add components to the frame
+    private void initializeComponents() {
+        JScrollPane scrollPane = new JScrollPane(csvTable);
         add(scrollPane, BorderLayout.CENTER);
 
-        JPanel dashboardPanel = new JPanel();
-        dashboardPanel.setLayout(new GridLayout(2, 1));
-        dashboardPanel.add(totalFacultyLabel);
-        dashboardPanel.add(averageExperienceLabel);
-
-        add(dashboardPanel, BorderLayout.NORTH);
-
         JPanel buttonPanel = new JPanel();
-        buttonPanel.add(addFacultyButton);
-        buttonPanel.add(removeFacultyButton);
-        buttonPanel.add(editFacultyButton);
+        addButtonToPanel(buttonPanel, "Add", this::addEntry);
+        addButtonToPanel(buttonPanel, "Delete", this::deleteSelectedRow);
+        addButtonToPanel(buttonPanel, "Edit", this::editSelectedEntry);
+        addButtonToPanel(buttonPanel, "Refresh", this::refreshTable);
+        addButtonToPanel(buttonPanel, "Print", this::printCSV);
+        addButtonToPanel(buttonPanel, "Logout", this::logout);
+
         add(buttonPanel, BorderLayout.SOUTH);
 
-        // Add action listeners to the buttons
-        addFacultyButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                addFaculty();
-            }
+        searchField = new JTextField();
+        searchField.setColumns(20);
+        JButton searchButton = new JButton("Search By ID");
+        searchButton.addActionListener(this::searchData);
+
+        searchNameField = new JTextField();
+        searchNameField.setColumns(20);
+        JButton searchNameButton = new JButton("Search By Name");
+        JTextField searchTextField = new JTextField();
+        searchNameButton.addActionListener(e -> {
+            String searchTerm = searchTextField.getText();
+            searchNameData(e, 1);
         });
 
-        removeFacultyButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                removeFaculty();
-            }
-        });
 
-        editFacultyButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                editFaculty();
-            }
-        });
+        JPanel searchPanel = new JPanel();
+        searchPanel.add(searchField);
+        searchPanel.add(searchButton);
 
-        // Load faculty from CSV file on initialization
-        loadFacultyFromCSV();
-        updateDashboard();
+        searchPanel.add(searchNameField);
+        searchPanel.add(searchNameButton);
+
+        add(searchPanel, BorderLayout.NORTH);
     }
 
-    private void addFaculty() {
-        String name = JOptionPane.showInputDialog(this, "Enter faculty name:");
-        if (name != null) {
-            String experienceString = JOptionPane.showInputDialog(this, "Enter years of experience:");
-            if (experienceString != null) {
-                try {
-                    int experience = Integer.parseInt(experienceString);
-                    tableModel.addRow(new Object[]{name, experience});
-                    updateDashboard();
-                    saveFacultyToCSV();
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(this, "Please enter a valid number for experience", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            }
+    private void searchData(ActionEvent actionEvent) {
+        String searchTerm = searchField.getText();
+
+        if (searchTerm.isEmpty()) {
+            // If the search term is empty, refresh the table to show all data
+            JOptionPane.showMessageDialog(this, "Search field is empty.");
         }
-    }
 
-    private void removeFaculty() {
-        int selectedRow = facultyTable.getSelectedRow();
-        if (selectedRow != -1) {
-            tableModel.removeRow(selectedRow);
-            updateDashboard();
-            saveFacultyToCSV();
-        } else {
-            JOptionPane.showMessageDialog(this, "Please select a faculty member to remove", "Error", JOptionPane.ERROR_MESSAGE);
+        DefaultTableModel filteredModel = new NonEditableTableModel(new Object[]{}, 0);
+
+        for (int col = 0; col < tableModel.getColumnCount(); col++) {
+            filteredModel.addColumn(tableModel.getColumnName(col));
         }
-    }
 
-    private void editFaculty() {
-        int selectedRow = facultyTable.getSelectedRow();
-        if (selectedRow != -1) {
-            String newName = JOptionPane.showInputDialog(this, "Enter new name:");
-            if (newName != null) {
-                String newExperienceString = JOptionPane.showInputDialog(this, "Enter new years of experience:");
-                if (newExperienceString != null) {
-                    try {
-                        int newExperience = Integer.parseInt(newExperienceString);
-                        tableModel.setValueAt(newName, selectedRow, 0);
-                        tableModel.setValueAt(newExperience, selectedRow, 1);
-                        updateDashboard();
-                        saveFacultyToCSV();
-                    } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(this, "Please enter a valid number for experience", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Please select a faculty member to edit", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private void updateDashboard() {
-        int totalFaculty = tableModel.getRowCount();
-        totalFacultyLabel.setText("Total Faculty: " + totalFaculty);
-
-        int totalExperience = 0;
         for (int row = 0; row < tableModel.getRowCount(); row++) {
-            totalExperience += (int) tableModel.getValueAt(row, 1);
+            Object cellValue = tableModel.getValueAt(row, 0); // Assuming ID is in the first column
+            if (cellValue != null && cellValue.toString().toLowerCase().contains(searchTerm)) {
+                Vector<Object> rowData = new Vector<>();
+                for (int col = 0; col < tableModel.getColumnCount(); col++) {
+                    rowData.add(tableModel.getValueAt(row, col));
+                }
+                filteredModel.addRow(rowData);
+            }
         }
 
-        double averageExperience = totalFaculty > 0 ? (double) totalExperience / totalFaculty : 0;
-        averageExperienceLabel.setText(String.format("Average Experience: %.2f years", averageExperience));
+        // Update the table with the filtered model
+        csvTable.setModel(filteredModel);
     }
 
-    private void loadFacultyFromCSV() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH))) {
-            String line;
+    private void searchNameData(ActionEvent actionEvent, int column) {
+
+        String searchTerm = searchNameField.getText().toLowerCase();
+
+        if (searchTerm.isEmpty()) {
+            // If the search term is empty, refresh the table to show all data
+            JOptionPane.showMessageDialog(this, "Search field is empty.");
+        }
+
+        DefaultTableModel filteredModel = new NonEditableTableModel(new Object[]{}, 0);
+
+        for (int col = 0; col < tableModel.getColumnCount(); col++) {
+            filteredModel.addColumn(tableModel.getColumnName(col));
+        }
+
+        for (int row = 0; row < tableModel.getRowCount(); row++) {
+            Object cellValue = tableModel.getValueAt(row, column); // Assuming Name is in the first column
+            if (cellValue != null && cellValue.toString().toLowerCase().contains(searchTerm)) {
+                Vector<Object> rowData = new Vector<>();
+                for (int col = 0; col < tableModel.getColumnCount(); col++) {
+                    rowData.add(tableModel.getValueAt(row, col));
+                }
+                filteredModel.addRow(rowData);
+            }
+        }
+
+        // Update the table with the filtered model
+        csvTable.setModel(filteredModel);
+    }
+
+    private void addButtonToPanel(JPanel panel, String label, ActionListener listener) {
+        JButton button = new JButton(label);
+        button.addActionListener(listener);
+        panel.add(button);
+    }
+
+    private void addEntry(ActionEvent actionEvent) {
+        JFrame addEntryFrame = createEntryFrame("Add Entry", true);
+        addEntryFrame.setVisible(true);
+    }
+
+    private void editSelectedEntry(ActionEvent actionEvent) {
+        int selectedRow = csvTable.getSelectedRow();
+        if (selectedRow != -1) {
+            JFrame editEntryFrame = createEntryFrame("Edit Entry", false);
+            populateFieldsWithRowData(editEntryFrame, selectedRow);
+            editEntryFrame.setVisible(true);
+        } else {
+            showError("Please select a row to edit");
+        }
+    }
+
+    private JFrame createEntryFrame(String title, boolean isNewEntry) {
+        JFrame entryFrame = new JFrame(title);
+        entryFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        entryFrame.setSize(400, 300);
+        entryFrame.setLayout(new GridLayout(tableModel.getColumnCount() + 1, 2));
+
+        JTextField[] fields = new JTextField[tableModel.getColumnCount()];
+        for (int i = 0; i < fields.length; i++) {
+            entryFrame.add(new JLabel(tableModel.getColumnName(i) + ":"));
+            fields[i] = new JTextField();
+            entryFrame.add(fields[i]);
+        }
+
+        JButton saveOrUpdateButton = new JButton(isNewEntry ? "Save" : "Update");
+        saveOrUpdateButton.addActionListener(e -> {
+            String[] data = new String[fields.length];
+            for (int i = 0; i < fields.length; i++) {
+                data[i] = fields[i].getText();
+                if (data[i].isEmpty()) {
+                    showError("Please fill all fields");
+                    return;
+                }
+            }
+
+            if (isNewEntry) {
+                tableModel.addRow(data);
+            } else {
+                int selectedRow = csvTable.getSelectedRow();
+                for (int i = 0; i < data.length; i++) {
+                    tableModel.setValueAt(data[i], selectedRow, i);
+                }
+            }
+
+            saveDataToCSV(csvPath);
+            entryFrame.dispose();
+        });
+
+        entryFrame.add(new JLabel());
+        entryFrame.add(saveOrUpdateButton);
+
+        return entryFrame;
+    }
+
+    private void populateFieldsWithRowData(JFrame entryFrame, int selectedRow) {
+        JTextField[] fields = new JTextField[tableModel.getColumnCount()];
+        for (int i = 0; i < fields.length; i++) {
+            entryFrame.add(new JLabel(tableModel.getColumnName(i) + ":"));
+            fields[i] = new JTextField(tableModel.getValueAt(selectedRow, i).toString());
+            entryFrame.add(fields[i]);
+        }
+    }
+
+    public boolean loadDataFromCSV(String csvFilePath) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
+            String line = reader.readLine();
+
+            String[] headers = line.split(",");
+            if (tableModel.getColumnCount() == 0) {
+                for (String header : headers) {
+                    tableModel.addColumn(header);
+                }
+            }
+
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(",");
-                if (data.length == 2) {
-                    String name = data[0];
-                    int experience = Integer.parseInt(data[1]);
-                    tableModel.addRow(new Object[]{name, experience});
-                }
+                tableModel.addRow(data);
             }
-        } catch (FileNotFoundException e) {
-            System.out.println("CSV file not found. Starting with an empty list.");
-        } catch (IOException | NumberFormatException e) {
+            return true;
+        } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
-    private void saveFacultyToCSV() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(CSV_FILE_PATH))) {
-            for (int row = 0; row < tableModel.getRowCount(); row++) {
-                writer.write(tableModel.getValueAt(row, 0) + "," + tableModel.getValueAt(row, 1) + "\n");
+    private void deleteSelectedRow(ActionEvent actionEvent) {
+        int selectedRow = csvTable.getSelectedRow();
+        if (selectedRow != -1) {
+            String selectedCourseCode = tableModel.getValueAt(selectedRow, 0).toString();
+            int csvRowIndex = findRowIndexByCourseCode(selectedCourseCode);
+            if (csvRowIndex != -1) {
+                tableModel.removeRow(selectedRow);
+                saveDataToCSV(csvPath);
+            } else {
+                showError("Failed to find corresponding row in CSV");
             }
-            System.out.println("Faculty data saved to CSV.");
+        } else {
+            showError("Please select a row to delete");
+        }
+    }
+
+    private void refreshTable(ActionEvent actionEvent) {
+        tableModel.setRowCount(0);
+        csvTable.setModel(tableModel);
+        loadDataFromCSV(csvPath);
+    }
+
+    private void printCSV(ActionEvent actionEvent) {
+        CsvPrinter csvPrinter = new CsvPrinter();
+        csvPrinter.printCSV(csvPath);
+    }
+
+    private void logout(ActionEvent actionEvent) {
+        JOptionPane.showMessageDialog(null, "You have been successfully logged out.");
+        Login login = new Login();
+        login.setVisible(true);
+        dispose();
+    }
+
+    private int findRowIndexByCourseCode(String courseCode) {
+        for (int row = 0; row < tableModel.getRowCount(); row++) {
+            if (tableModel.getValueAt(row, 0).toString().equals(courseCode)) {
+                return row;
+            }
+        }
+        return -1;
+    }
+
+    private void saveDataToCSV(String csvFilePath) {
+        try (FileWriter writer = new FileWriter(csvFilePath)) {
+            for (int i = 0; i < tableModel.getColumnCount(); i++) {
+                writer.write(tableModel.getColumnName(i));
+                if (i < tableModel.getColumnCount() - 1) {
+                    writer.write(",");
+                }
+            }
+            writer.write("\n");
+
+            for (int row = 0; row < tableModel.getRowCount(); row++) {
+                for (int col = 0; col < tableModel.getColumnCount(); col++) {
+                    writer.write(tableModel.getValueAt(row, col).toString());
+                    if (col < tableModel.getColumnCount() - 1) {
+                        writer.write(",");
+                    }
+                }
+                writer.write("\n");
+            }
+
+            System.out.println("Data saved to CSV.");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    private void showError(String message) {
+        JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
     public static void main() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new FacultyManagement().setVisible(true);
-            }
+        SwingUtilities.invokeLater(() -> {
+            FacultyManagement app = new FacultyManagement();
+            app.setVisible(true);
         });
+    }
+
+    public static class NonEditableTableModel extends DefaultTableModel {
+
+        public NonEditableTableModel(Object[] columnNames, int rowCount) {
+            super(columnNames, rowCount);
+        }
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
     }
 }

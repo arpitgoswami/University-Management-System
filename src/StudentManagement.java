@@ -16,6 +16,7 @@ public class StudentManagement extends JFrame {
     private final JTable csvTable;
     public boolean status;
     private JTextField searchField;
+    private JTextField searchNameField;
 
     public StudentManagement() {
         setTitle("Student Management");
@@ -55,28 +56,32 @@ public class StudentManagement extends JFrame {
         JButton searchButton = new JButton("Search By ID");
         searchButton.addActionListener(this::searchData);
 
-        JTextField searchFieldm = new JTextField();
-        searchFieldm.setColumns(20);
-        JButton searchmButton = new JButton("Search By Name");
-        searchmButton.addActionListener(this::searchData);
+        searchNameField = new JTextField();
+        searchNameField.setColumns(20);
+        JButton searchNameButton = new JButton("Search By Name");
+        JTextField searchTextField = new JTextField();
+        searchNameButton.addActionListener(e -> {
+            String searchTerm = searchTextField.getText();
+            searchNameData(e, 1);
+        });
+
 
         JPanel searchPanel = new JPanel();
         searchPanel.add(searchField);
         searchPanel.add(searchButton);
 
-        searchPanel.add(searchFieldm);
-        searchPanel.add(searchmButton);
+        searchPanel.add(searchNameField);
+        searchPanel.add(searchNameButton);
 
         add(searchPanel, BorderLayout.NORTH);
     }
 
     private void searchData(ActionEvent actionEvent) {
-        String searchTerm = searchField.getText().toLowerCase();
+        String searchTerm = searchField.getText();
 
         if (searchTerm.isEmpty()) {
             // If the search term is empty, refresh the table to show all data
-            refreshTable(actionEvent);
-            return;
+            JOptionPane.showMessageDialog(this, "Search field is empty.");
         }
 
         DefaultTableModel filteredModel = new NonEditableTableModel(new Object[]{}, 0);
@@ -87,6 +92,36 @@ public class StudentManagement extends JFrame {
 
         for (int row = 0; row < tableModel.getRowCount(); row++) {
             Object cellValue = tableModel.getValueAt(row, 0); // Assuming ID is in the first column
+            if (cellValue != null && cellValue.toString().toLowerCase().contains(searchTerm)) {
+                Vector<Object> rowData = new Vector<>();
+                for (int col = 0; col < tableModel.getColumnCount(); col++) {
+                    rowData.add(tableModel.getValueAt(row, col));
+                }
+                filteredModel.addRow(rowData);
+            }
+        }
+
+        // Update the table with the filtered model
+        csvTable.setModel(filteredModel);
+    }
+
+    private void searchNameData(ActionEvent actionEvent, int column) {
+
+        String searchTerm = searchNameField.getText().toLowerCase();
+
+        if (searchTerm.isEmpty()) {
+            // If the search term is empty, refresh the table to show all data
+            JOptionPane.showMessageDialog(this, "Search field is empty.");
+        }
+
+        DefaultTableModel filteredModel = new NonEditableTableModel(new Object[]{}, 0);
+
+        for (int col = 0; col < tableModel.getColumnCount(); col++) {
+            filteredModel.addColumn(tableModel.getColumnName(col));
+        }
+
+        for (int row = 0; row < tableModel.getRowCount(); row++) {
+            Object cellValue = tableModel.getValueAt(row, column); // Assuming Name is in the first column
             if (cellValue != null && cellValue.toString().toLowerCase().contains(searchTerm)) {
                 Vector<Object> rowData = new Vector<>();
                 for (int col = 0; col < tableModel.getColumnCount(); col++) {
@@ -269,7 +304,7 @@ public class StudentManagement extends JFrame {
         JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
-    public static void main(String[] args) {
+    public static void main() {
         SwingUtilities.invokeLater(() -> {
             StudentManagement app = new StudentManagement();
             app.setVisible(true);

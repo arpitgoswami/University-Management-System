@@ -7,15 +7,18 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Vector;
 
 public class CourseManagement extends JFrame {
 
     public String csvPath = "./csv/courses.csv";
-    private final NonEditableTableModel tableModel;
-    private final JTable csvTable;
+    private NonEditableTableModel tableModel;
+    private JTable csvTable;
+    private JTextField searchField;
+    private JTextField searchNameField;
 
     public CourseManagement() {
-        setTitle("Course Management");
+        setTitle("Student Management");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(1200, 800);
 
@@ -36,9 +39,93 @@ public class CourseManagement extends JFrame {
         addButtonToPanel(buttonPanel, "Delete", this::deleteSelectedRow);
         addButtonToPanel(buttonPanel, "Edit", this::editSelectedEntry);
         addButtonToPanel(buttonPanel, "Refresh", this::refreshTable);
-
+        addButtonToPanel(buttonPanel, "Print", this::printCSV);
+        addButtonToPanel(buttonPanel, "Logout", this::logout);
 
         add(buttonPanel, BorderLayout.SOUTH);
+
+        searchField = new JTextField();
+        searchField.setColumns(20);
+        JButton searchButton = new JButton("Search By ID");
+        searchButton.addActionListener(this::searchData);
+
+        searchNameField = new JTextField();
+        searchNameField.setColumns(20);
+        JButton searchNameButton = new JButton("Search By Name");
+        JTextField searchTextField = new JTextField();
+        searchNameButton.addActionListener(e -> {
+            String searchTerm = searchTextField.getText();
+            searchNameData(e, 1);
+        });
+
+
+        JPanel searchPanel = new JPanel();
+        searchPanel.add(searchField);
+        searchPanel.add(searchButton);
+
+        searchPanel.add(searchNameField);
+        searchPanel.add(searchNameButton);
+
+        add(searchPanel, BorderLayout.NORTH);
+    }
+
+    private void searchData(ActionEvent actionEvent) {
+        String searchTerm = searchField.getText().toLowerCase();
+
+        if (searchTerm.isEmpty()) {
+            // If the search term is empty, refresh the table to show all data
+            JOptionPane.showMessageDialog(this, "Search field is empty.");
+        }
+
+        DefaultTableModel filteredModel = new NonEditableTableModel(new Object[]{}, 0);
+
+        for (int col = 0; col < tableModel.getColumnCount(); col++) {
+            filteredModel.addColumn(tableModel.getColumnName(col));
+        }
+
+        for (int row = 0; row < tableModel.getRowCount(); row++) {
+            Object cellValue = tableModel.getValueAt(row, 0); // Assuming ID is in the first column
+            if (cellValue != null && cellValue.toString().toLowerCase().contains(searchTerm)) {
+                Vector<Object> rowData = new Vector<>();
+                for (int col = 0; col < tableModel.getColumnCount(); col++) {
+                    rowData.add(tableModel.getValueAt(row, col));
+                }
+                filteredModel.addRow(rowData);
+            }
+        }
+
+        // Update the table with the filtered model
+        csvTable.setModel(filteredModel);
+    }
+
+    private void searchNameData(ActionEvent actionEvent, int column) {
+
+        String searchTerm = searchNameField.getText().toLowerCase();
+
+        if (searchTerm.isEmpty()) {
+            // If the search term is empty, refresh the table to show all data
+            JOptionPane.showMessageDialog(this, "Search field is empty.");
+        }
+
+        DefaultTableModel filteredModel = new NonEditableTableModel(new Object[]{}, 0);
+
+        for (int col = 0; col < tableModel.getColumnCount(); col++) {
+            filteredModel.addColumn(tableModel.getColumnName(col));
+        }
+
+        for (int row = 0; row < tableModel.getRowCount(); row++) {
+            Object cellValue = tableModel.getValueAt(row, column); // Assuming Name is in the first column
+            if (cellValue != null && cellValue.toString().toLowerCase().contains(searchTerm)) {
+                Vector<Object> rowData = new Vector<>();
+                for (int col = 0; col < tableModel.getColumnCount(); col++) {
+                    rowData.add(tableModel.getValueAt(row, col));
+                }
+                filteredModel.addRow(rowData);
+            }
+        }
+
+        // Update the table with the filtered model
+        csvTable.setModel(filteredModel);
     }
 
     private void addButtonToPanel(JPanel panel, String label, ActionListener listener) {
@@ -115,7 +202,7 @@ public class CourseManagement extends JFrame {
         }
     }
 
-    private void loadDataFromCSV(String csvFilePath) {
+    public boolean loadDataFromCSV(String csvFilePath) {
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
             String line = reader.readLine();
 
@@ -130,8 +217,10 @@ public class CourseManagement extends JFrame {
                 String[] data = line.split(",");
                 tableModel.addRow(data);
             }
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
@@ -153,7 +242,20 @@ public class CourseManagement extends JFrame {
 
     private void refreshTable(ActionEvent actionEvent) {
         tableModel.setRowCount(0);
+        csvTable.setModel(tableModel);
         loadDataFromCSV(csvPath);
+    }
+
+    private void printCSV(ActionEvent actionEvent) {
+        CsvPrinter csvPrinter = new CsvPrinter();
+        csvPrinter.printCSV(csvPath);
+    }
+
+    private void logout(ActionEvent actionEvent) {
+        JOptionPane.showMessageDialog(null, "You have been successfully logged out.");
+        Login login = new Login();
+        login.setVisible(true);
+        dispose();
     }
 
     private int findRowIndexByCourseCode(String courseCode) {
@@ -195,7 +297,7 @@ public class CourseManagement extends JFrame {
         JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
-    public static void main(String[] args) {
+    public static void main() {
         SwingUtilities.invokeLater(() -> {
             CourseManagement app = new CourseManagement();
             app.setVisible(true);

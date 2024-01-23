@@ -45,7 +45,7 @@ public class MainFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 StudentManagement studentManagement = new StudentManagement();
-                // studentManagement.main();
+                studentManagement.main();
             }
         });
 
@@ -61,7 +61,7 @@ public class MainFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CourseManagement courseManagement = new CourseManagement();
-                // courseManagement.main();
+                courseManagement.main();
             }
         });
 
