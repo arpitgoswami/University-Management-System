@@ -2,6 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class MainFrame extends JFrame {
 
@@ -13,8 +16,8 @@ public class MainFrame extends JFrame {
 
         // Create sidebar with buttons for different functionalities
         JPanel sidebar = new JPanel();
-        sidebar.setLayout(new GridLayout(10,1));
-        sidebar.setPreferredSize(new Dimension(240,0));
+        sidebar.setLayout(new GridLayout(10, 1));
+        sidebar.setPreferredSize(new Dimension(240, 0));
 
         JButton studentButton = createSidebarButton("Student Management");
         JButton facultyButton = createSidebarButton("Faculty Management");
@@ -63,6 +66,9 @@ public class MainFrame extends JFrame {
             }
         });
 
+        sidebar.setBackground(Color.DARK_GRAY);
+        sidebar.setOpaque(true);
+
         // Add buttons to the sidebar
         sidebar.add(studentButton);
         sidebar.add(facultyButton);
@@ -70,11 +76,21 @@ public class MainFrame extends JFrame {
         sidebar.add(attendanceButton);
         sidebar.add(feeButton);
 
+        // Function Calls
+        String totalStudents;
+        String totalEmployees;
+        try {
+            totalStudents = String.valueOf(countLines("./csv/students.csv"));
+            totalEmployees = String.valueOf(countLines("./csv/faculty.csv"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         // Create content panel with cards and notifications
         JPanel contentPanel = new JPanel(new BorderLayout());
         JPanel cardPanel = new JPanel(new GridLayout(2, 2));
-        cardPanel.add(createCard("Total Students", "1000"));
-        cardPanel.add(createCard("Total Employees", "500"));
+        cardPanel.add(createCard("Total Students", totalStudents));
+        cardPanel.add(createCard("Total Employees", totalEmployees));
         cardPanel.add(createCard("Revenue", "$1,000,000"));
         cardPanel.add(createCard("Total Profit", "$500,000"));
 
@@ -113,10 +129,19 @@ public class MainFrame extends JFrame {
         return card;
     }
 
-    public static void main(String[] args) {
+    public static int countLines(String filePath) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            int lineCount = 0;
+            while (reader.readLine() != null) {
+                lineCount++;
+            }
+            return lineCount-1;
+        }
+    }
+
+    public static void main() {
         SwingUtilities.invokeLater(() -> {
             new MainFrame().setVisible(true);
-            //System.out.println(role);
         });
     }
 }

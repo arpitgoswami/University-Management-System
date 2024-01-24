@@ -1,18 +1,33 @@
+import com.formdev.flatlaf.*;
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 
 public class Login extends JFrame {
 
-    private JTextField usernameField;
-    private JPasswordField passwordField;
-    private JRadioButton adminRadio;
-    private JRadioButton facultyRadio;
-    private JRadioButton studentRadio;
-    public String permission;
+    private final JTextField usernameField;
+    private final JPasswordField passwordField;
+    private final JRadioButton adminRadio;
+    private final JRadioButton facultyRadio;
+    private final JRadioButton studentRadio;
+
+    public static String roleStatus;
+    public static String userName;
 
     public Login() {
         super("Login Interface");
+
+        try {
+            UIManager.setLookAndFeel(new FlatMacLightLaf());
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
+
+        Font customFont = new Font("Arial", Font.BOLD, 106);
+        this.setFont(customFont);
+
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(400, 200);
 
@@ -65,8 +80,9 @@ public class Login extends JFrame {
         if (authenticate(username, new String(password), role)) {
             showSuccess("Login successful as " + role);
             MainFrame mainFrame = new MainFrame();
-            //mainFrame.main(role);
-            permission = role;
+            roleStatus = role;
+            userName = username;
+            mainFrame.main();
             dispose();
             // Open new window or perform actions
         } else {

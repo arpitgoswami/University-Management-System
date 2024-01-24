@@ -14,7 +14,6 @@ public class StudentManagement extends JFrame {
     public String csvPath = "./csv/students.csv";
     private final NonEditableTableModel tableModel;
     private final JTable csvTable;
-    public boolean status;
     private JTextField searchField;
     private JTextField searchNameField;
 
@@ -28,7 +27,7 @@ public class StudentManagement extends JFrame {
         csvTable.setRowSelectionAllowed(true);
 
         initializeComponents();
-        status = loadDataFromCSV(csvPath);
+        loadDataFromCSV(csvPath);
     }
 
     private void initializeComponents() {
@@ -42,12 +41,6 @@ public class StudentManagement extends JFrame {
         addButtonToPanel(buttonPanel, "Refresh", this::refreshTable);
         addButtonToPanel(buttonPanel, "Print", this::printCSV);
         addButtonToPanel(buttonPanel, "Logout", this::logout);
-
-        JLabel statusLabel = new JLabel(!status? "Server Running" : "Server Failed");
-        statusLabel.setForeground(Color.BLACK);
-        statusLabel.setBackground(!status? Color.GREEN : Color.RED);
-        statusLabel.setOpaque(true);
-        buttonPanel.add(statusLabel);
 
         add(buttonPanel, BorderLayout.SOUTH);
 
