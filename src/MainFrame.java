@@ -1,10 +1,8 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 
 public class MainFrame extends JFrame {
 
@@ -76,41 +74,20 @@ public class MainFrame extends JFrame {
         sidebar.add(attendanceButton);
         sidebar.add(feeButton);
 
-        // Function Calls
-        String totalStudents;
-        String totalEmployees;
-        try {
-            totalStudents = String.valueOf(countLines("./csv/students.csv"));
-            totalEmployees = String.valueOf(countLines("./csv/faculty.csv"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
         // Create content panel with cards and notifications
         JPanel contentPanel = new JPanel(new BorderLayout());
-        JPanel cardPanel = new JPanel(new GridLayout(2, 2));
-        cardPanel.add(createCard("Total Students", totalStudents));
-        cardPanel.add(createCard("Total Employees", totalEmployees));
-        cardPanel.add(createCard("Revenue", "$1,000,000"));
-        cardPanel.add(createCard("Total Profit", "$500,000"));
+        contentPanel.setBorder(new EmptyBorder(10,10,10,10));
 
-        JPanel notificationPanel = new JPanel(new BorderLayout());
-        notificationPanel.setBorder(BorderFactory.createTitledBorder("Notifications"));
-        JTextArea notificationArea = new JTextArea(15, 20);
-        JScrollPane scrollPane = new JScrollPane(notificationArea);
-        notificationPanel.add(scrollPane, BorderLayout.CENTER);
-
-        contentPanel.add(cardPanel, BorderLayout.CENTER);
-        contentPanel.add(notificationPanel, BorderLayout.SOUTH);
-
-        // Set layout for the main frame
         setLayout(new BorderLayout());
         add(sidebar, BorderLayout.WEST);
         add(contentPanel, BorderLayout.CENTER);
 
         StatusBar statusBar = new StatusBar();
         StatusBar.main(this);
-        add(statusBar.statusPanel, BorderLayout.NORTH);
+        contentPanel.add(statusBar.statusPanel, BorderLayout.NORTH);
+
+        Dashboard dashboard = new Dashboard();
+        contentPanel.add(dashboard, BorderLayout.CENTER);
     }
 
     private JButton createSidebarButton(String buttonText) {
@@ -119,27 +96,7 @@ public class MainFrame extends JFrame {
         return button;
     }
 
-    private JPanel createCard(String title, String value) {
-        JPanel card = new JPanel(new BorderLayout());
-        card.setBorder(BorderFactory.createTitledBorder(title));
-        JLabel valueLabel = new JLabel(value);
-        valueLabel.setFont(new Font("Arial", Font.BOLD, 18));
-        valueLabel.setHorizontalAlignment(JLabel.CENTER);
-        card.add(valueLabel, BorderLayout.CENTER);
-        return card;
-    }
-
-    public static int countLines(String filePath) throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            int lineCount = 0;
-            while (reader.readLine() != null) {
-                lineCount++;
-            }
-            return lineCount-1;
-        }
-    }
-
-    public static void main() {
+    public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             new MainFrame().setVisible(true);
         });

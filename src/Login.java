@@ -1,8 +1,10 @@
-import com.formdev.flatlaf.*;
-import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import com.formdev.flatlaf.FlatIntelliJLaf;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.io.*;
 
 public class Login extends JFrame {
@@ -16,20 +18,22 @@ public class Login extends JFrame {
     public static String roleStatus;
     public static String userName;
 
+    private static final String CSV_FILE_PATH = "./csv/registration.csv";
+
     public Login() {
         super("Login Interface");
 
         try {
-            UIManager.setLookAndFeel(new FlatMacLightLaf());
+            UIManager.setLookAndFeel(new FlatIntelliJLaf());
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
 
-        Font customFont = new Font("Arial", Font.BOLD, 106);
-        this.setFont(customFont);
-
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setSize(400, 200);
+        setSize(360, 220);
+
+        JPanel loginCredentials = new JPanel();
+        loginCredentials.setLayout(new GridLayout(6,2));
 
         usernameField = new JTextField(15);
         passwordField = new JPasswordField(15);
@@ -44,56 +48,71 @@ public class Login extends JFrame {
         roleGroup.add(facultyRadio);
         roleGroup.add(studentRadio);
 
-        setLayout(new GridLayout(6, 2));
+        loginCredentials.add(new JLabel("Username:"));
+        loginCredentials.add(usernameField);
+        loginCredentials.add(new JLabel("Password:"));
+        loginCredentials.add(passwordField);
+        loginCredentials.add(new JLabel("Role:"));
+        loginCredentials.add(adminRadio);
+        loginCredentials.add(new JLabel());
+        loginCredentials.add(facultyRadio);
+        loginCredentials.add(new JLabel());
+        loginCredentials.add(studentRadio);
+        loginCredentials.add(loginButton);
+        loginCredentials.add(registerButton);
 
-        add(new JLabel("Username:"));
-        add(usernameField);
-        add(new JLabel("Password:"));
-        add(passwordField);
-        add(new JLabel("Role:"));
-        add(adminRadio);
-        add(new JLabel());
-        add(facultyRadio);
-        add(new JLabel());
-        add(studentRadio);
-        add(loginButton);
-        add(registerButton);
+        EmptyBorder emptyBorder = new EmptyBorder(10,10,10,10);
+        loginCredentials.setBorder(emptyBorder);
 
-        loginButton.addActionListener(e -> login());
-        registerButton.addActionListener(e -> register());
+        add(loginCredentials);
+        setForeground(Color.BLACK);
+        loginButton.addActionListener(this::performLoginOrRegister);
+        registerButton.addActionListener(this::performLoginOrRegister);
     }
 
-    private void login() {
+    private void performLoginOrRegister(ActionEvent e) {
         String username = usernameField.getText();
         char[] password = passwordField.getPassword();
         String role = "";
 
-        if (adminRadio.isSelected()) role = "Admin";
-        else if (facultyRadio.isSelected()) role = "Faculty";
-        else if (studentRadio.isSelected()) role = "Student";
+        if (adminRadio.isSelected()) role = UserRole.ADMIN.name();
+        else if (facultyRadio.isSelected()) role = UserRole.FACULTY.name();
+        else if (studentRadio.isSelected()) role = UserRole.STUDENT.name();
 
         if (username.isEmpty() || password.length == 0 || role.isEmpty()) {
             showError("Please enter all fields");
             return;
         }
 
-        if (authenticate(username, new String(password), role)) {
-            showSuccess("Login successful as " + role);
-            MainFrame mainFrame = new MainFrame();
-            roleStatus = role;
-            userName = username;
-            mainFrame.main();
-            dispose();
-            // Open new window or perform actions
+        if (e.getActionCommand().equals("Login")) {
+            performLogin(username, new String(password), role);
         } else {
-            showError("Invalid login credentials");
+            performRegister(username, new String(password), role);
         }
 
         passwordField.setText("");
     }
 
+    private void performLogin(String username, String password, String role) {
+        if (authenticate(username, password, role)) {
+            showSuccess("Login successful as " + role);
+            MainFrame mainFrame = new MainFrame();
+            roleStatus = role;
+            userName = username;
+            //mainFrame.main();
+            dispose();
+            // Open new window or perform actions
+        } else {
+            showError("Invalid login credentials");
+        }
+    }
+
+    private void performRegister(String username, String password, String role) {
+        saveRegistrationData(username, password, role);
+    }
+
     private boolean authenticate(String username, String password, String role) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("./csv/registration.csv"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(",");
@@ -101,36 +120,19 @@ public class Login extends JFrame {
                     return true;
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
         return false;
     }
 
-    private void register() {
-        String username = usernameField.getText();
-        char[] password = passwordField.getPassword();
-        String role = "";
-
-        if (adminRadio.isSelected()) role = "Admin";
-        else if (facultyRadio.isSelected()) role = "Faculty";
-        else if (studentRadio.isSelected()) role = "Student";
-
-        if (username.isEmpty() || password.length == 0 || role.isEmpty()) {
-            showError("Please enter all fields");
-            return;
-        }
-
-        saveRegistrationData(username, new String(password), role);
-    }
-
     private void saveRegistrationData(String username, String password, String role) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("./csv/registration.csv", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(CSV_FILE_PATH, true))) {
             writer.write(username + "," + password + "," + role + "\n");
             showSuccess("Registration successful!");
-        } catch (IOException e) {
+        } catch (IOException ex) {
             showError("Error saving registration data");
-            e.printStackTrace();
+            ex.printStackTrace();
         }
     }
 
@@ -149,4 +151,9 @@ public class Login extends JFrame {
         });
     }
 
+    private enum UserRole {
+        ADMIN,
+        FACULTY,
+        STUDENT
+    }
 }

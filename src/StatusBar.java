@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,40 +23,39 @@ public class StatusBar {
             "<b>Profile Management</b>:<br>" +
             "&nbsp;&nbsp;&nbsp;&nbsp; - Explain how users can update their profiles.<br>" +
             "&nbsp;&nbsp;&nbsp;&nbsp; - Provide guidance on changing passwords and other account settings.<br><br>" +
-            "<b>Attendance Tracking:</b>:<br>" +
+            "<b>Attendance Tracking</b>:<br>" +
             "&nbsp;&nbsp;&nbsp;&nbsp; - Detail how to record and view student attendance.<br>" +
             "&nbsp;&nbsp;&nbsp;&nbsp; - Explain any attendance policies.<br><br>" +
             "For further information <a href=\"https://example.com\">click here.</a>" +
             "</html>";
     public static void main(MainFrame mainFrame){
         statusPanel = new JPanel();
-        statusPanel.setSize(1200,200);
-        statusPanel.setBackground(Color.CYAN);
+        statusPanel.setLayout(new GridLayout(1,1));
 
         JPanel statusLeftPanel = new JPanel();
-        statusLeftPanel.setLayout(new BoxLayout(statusLeftPanel, BoxLayout.PAGE_AXIS));
+        statusLeftPanel.setLayout(new GridLayout(4,4));
 
         Login login = new Login();
 
-        statusLeftPanel.add(new JLabel("Username: " + login.userName));
-        statusLeftPanel.add(new JLabel("Role: " + login.roleStatus));
+        statusLeftPanel.add(new JLabel("Username: "));
+        statusLeftPanel.add(new JLabel(login.userName));
+        statusLeftPanel.add(new JLabel("Role:"));
+        statusLeftPanel.add(new JLabel(login.roleStatus));
 
         // Server Status Remaning
-        JLabel statusLabel = new JLabel(status ? "Server Status: Running" : "Server Status: Failed");
-        statusLabel.setBackground(status ? Color.GREEN : Color.RED);
-        statusLabel.setOpaque(true);
+        statusLeftPanel.add(new JLabel("Server Status: "));
+        JLabel statusLabel = new JLabel(status ? "Running" : "Failed");
         statusLeftPanel.add(statusLabel);
 
         // Update Status Remaning
-        JLabel updateLabel = new JLabel(updateStatus ? "Update Status: Up-to-date" : "Server Status: Never Updated");
-        updateLabel.setBackground(updateStatus ? Color.GREEN : Color.RED);
-        updateLabel.setOpaque(true);
+        statusLeftPanel.add(new JLabel("Update Status: "));
+        JLabel updateLabel = new JLabel(updateStatus ? "Up-to-date" : "Never Updated");
         statusLeftPanel.add(updateLabel);
 
-        statusPanel.add(statusLeftPanel, BorderLayout.WEST);
+        statusPanel.add(statusLeftPanel);
 
         JPanel statusRightPanel = new JPanel();
-        statusRightPanel.setLayout(new BoxLayout(statusRightPanel, BoxLayout.LINE_AXIS));
+        statusRightPanel.setLayout(new GridLayout(2,4));
 
         JButton Help = new JButton("Help");
         Help.addActionListener(new ActionListener() {
@@ -96,7 +96,6 @@ public class StatusBar {
             }
         });
         statusRightPanel.add(logOut);
-
-        statusPanel.add(statusRightPanel, BorderLayout.EAST);
+        statusPanel.add(statusRightPanel);
     }
 }
