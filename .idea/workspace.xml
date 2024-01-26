@@ -4,30 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb63453f-e9e5-42be-b924-543e99b4744c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/flatlaf_3_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simple.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Simple.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Simple/AttendanceManagement$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/AttendanceManagement$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Simple/AttendanceManagement$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/AttendanceManagement$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Simple/AttendanceManagement$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Simple/AttendanceManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/AttendanceManagement.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Simple/Login.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/Login.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Simple/MainFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/MainFrame$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Simple/MainFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/MainFrame$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Simple/MainFrame$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/MainFrame$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Simple/MainFrame$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Simple/MainFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/MainFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Simple/StudentManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/StudentManagement.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AttendanceManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AttendanceManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CourseManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CourseManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FacultyManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FacultyManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FeeManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FeeManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/StatusBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StatusBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/StudentManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudentManagement.java" afterDir="false" />
-    </list>
+    <list default="true" id="fb63453f-e9e5-42be-b924-543e99b4744c" name="Changes" comment="Development Commit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -119,7 +96,20 @@
       <option name="presentableId" value="Default" />
       <updated>1699548875873</updated>
     </task>
+    <task id="LOCAL-00001" summary="Development Commit">
+      <option name="closed" value="true" />
+      <created>1706256817744</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1706256817744</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Development Commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Development Commit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
