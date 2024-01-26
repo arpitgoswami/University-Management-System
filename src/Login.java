@@ -1,13 +1,15 @@
+import com.formdev.flatlaf.FlatDarculaLaf;
+import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.*;
 
-public class Login extends JFrame {
+public class Login {
 
     private final JTextField usernameField;
     private final JPasswordField passwordField;
@@ -17,20 +19,37 @@ public class Login extends JFrame {
 
     public static String roleStatus;
     public static String userName;
+    public JFrame loginFrame;
 
     private static final String CSV_FILE_PATH = "./csv/registration.csv";
 
     public Login() {
-        super("Login Interface");
-
         try {
             UIManager.setLookAndFeel(new FlatIntelliJLaf());
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
 
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setSize(360, 220);
+        loginFrame = new JFrame();
+        loginFrame.setTitle("Login Interface");
+        loginFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        loginFrame.setSize(360, 570);
+        //setUndecorated(true);
+
+        // Image Creation
+        ImageIcon originalIcon = new ImageIcon("./csv/banner.jpg"); // Replace with the actual path to your image
+        Image originalImage = originalIcon.getImage();
+
+        int targetWidth = 360; // Set your desired width
+        int targetHeight = 360; // Set your desired height
+
+        Image resizedImage = originalImage.getScaledInstance(targetWidth, targetHeight, Image.SCALE_SMOOTH);
+        ImageIcon resizedIcon = new ImageIcon(resizedImage);
+
+        JLabel imageLabel = new JLabel(resizedIcon);
+        loginFrame.add(imageLabel, BorderLayout.NORTH);
+
+        loginFrame.setLocationRelativeTo(null);
 
         JPanel loginCredentials = new JPanel();
         loginCredentials.setLayout(new GridLayout(6,2));
@@ -64,8 +83,8 @@ public class Login extends JFrame {
         EmptyBorder emptyBorder = new EmptyBorder(10,10,10,10);
         loginCredentials.setBorder(emptyBorder);
 
-        add(loginCredentials);
-        setForeground(Color.BLACK);
+        loginFrame.add(loginCredentials, BorderLayout.SOUTH);
+        loginFrame.setForeground(Color.BLACK);
         loginButton.addActionListener(this::performLoginOrRegister);
         registerButton.addActionListener(this::performLoginOrRegister);
     }
@@ -95,13 +114,12 @@ public class Login extends JFrame {
 
     private void performLogin(String username, String password, String role) {
         if (authenticate(username, password, role)) {
-            showSuccess("Login successful as " + role);
+            showSuccess("Login successful as " + role.toLowerCase());
             MainFrame mainFrame = new MainFrame();
             roleStatus = role;
             userName = username;
-            //mainFrame.main();
-            dispose();
-            // Open new window or perform actions
+            mainFrame.main();
+            loginFrame.dispose();
         } else {
             showError("Invalid login credentials");
         }
@@ -137,17 +155,17 @@ public class Login extends JFrame {
     }
 
     private void showError(String message) {
-        JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(loginFrame, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
     private void showSuccess(String message) {
-        JOptionPane.showMessageDialog(this, message, "Success", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(loginFrame, message, "Success", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             Login frame = new Login();
-            frame.setVisible(true);
+            frame.loginFrame.setVisible(true);
         });
     }
 

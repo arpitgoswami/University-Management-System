@@ -9,7 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Vector;
 
-public class CourseManagement extends JFrame {
+public class CourseManagement extends JPanel {
 
     public String csvPath = "./csv/courses.csv";
     private NonEditableTableModel tableModel;
@@ -18,13 +18,13 @@ public class CourseManagement extends JFrame {
     private JTextField searchNameField;
 
     public CourseManagement() {
-        setTitle("Student Management");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(1200, 800);
+        setLayout(new BorderLayout());
 
         tableModel = new NonEditableTableModel(new Object[]{}, 0);
         csvTable = new JTable(tableModel);
         csvTable.setRowSelectionAllowed(true);
+        csvTable.setShowHorizontalLines(true);
+        csvTable.setShowVerticalLines(true);
 
         initializeComponents();
         loadDataFromCSV(csvPath);
@@ -40,7 +40,6 @@ public class CourseManagement extends JFrame {
         addButtonToPanel(buttonPanel, "Edit", this::editSelectedEntry);
         addButtonToPanel(buttonPanel, "Refresh", this::refreshTable);
         addButtonToPanel(buttonPanel, "Print", this::printCSV);
-        addButtonToPanel(buttonPanel, "Logout", this::logout);
 
         add(buttonPanel, BorderLayout.SOUTH);
 
@@ -251,13 +250,6 @@ public class CourseManagement extends JFrame {
         csvPrinter.printCSV(csvPath);
     }
 
-    private void logout(ActionEvent actionEvent) {
-        JOptionPane.showMessageDialog(null, "You have been successfully logged out.");
-        Login login = new Login();
-        login.setVisible(true);
-        dispose();
-    }
-
     private int findRowIndexByCourseCode(String courseCode) {
         for (int row = 0; row < tableModel.getRowCount(); row++) {
             if (tableModel.getValueAt(row, 0).toString().equals(courseCode)) {
@@ -295,13 +287,6 @@ public class CourseManagement extends JFrame {
 
     private void showError(String message) {
         JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-    }
-
-    public static void main() {
-        SwingUtilities.invokeLater(() -> {
-            CourseManagement app = new CourseManagement();
-            app.setVisible(true);
-        });
     }
 
     public static class NonEditableTableModel extends DefaultTableModel {

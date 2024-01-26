@@ -31,6 +31,7 @@ public class StatusBar {
     public static void main(MainFrame mainFrame){
         statusPanel = new JPanel();
         statusPanel.setLayout(new GridLayout(1,1));
+        statusPanel.setBorder(new EmptyBorder(10,10,10,10));
 
         JPanel statusLeftPanel = new JPanel();
         statusLeftPanel.setLayout(new GridLayout(4,4));
@@ -92,7 +93,7 @@ public class StatusBar {
                 mainFrame.dispose();
 
                 Login login = new Login();
-                login.setVisible(true);
+                login.loginFrame.setVisible(true);
             }
         });
         statusRightPanel.add(logOut);

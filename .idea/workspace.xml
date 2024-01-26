@@ -5,17 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fb63453f-e9e5-42be-b924-543e99b4744c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/flatlaf_3_3.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/csv/registration.csv" beforeDir="false" afterPath="$PROJECT_DIR$/csv/registration.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simple.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Simple.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simple/AttendanceManagement$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/AttendanceManagement$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simple/AttendanceManagement$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/AttendanceManagement$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simple/AttendanceManagement$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simple/AttendanceManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/AttendanceManagement.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Simple/Login.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/Login.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Simple/MainFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/MainFrame$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Simple/MainFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/MainFrame$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Simple/MainFrame$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/MainFrame$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Simple/MainFrame$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/MainFrame$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simple/MainFrame$4.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Simple/MainFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/MainFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simple/StudentManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/StudentManagement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AttendanceManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AttendanceManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CourseManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CourseManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FacultyManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FacultyManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FeeManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FeeManagement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/StatusBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StatusBar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/StudentManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StudentManagement.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +82,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.MainFrame">
+  <component name="RunManager" selected="Application.Login">
     <configuration name="CourseManagement" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="CourseManagement" />
       <module name="Simple" />

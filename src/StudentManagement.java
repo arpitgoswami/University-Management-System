@@ -9,7 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Vector;
 
-public class StudentManagement extends JFrame {
+public class StudentManagement extends JPanel {
 
     public String csvPath = "./csv/students.csv";
     private final NonEditableTableModel tableModel;
@@ -18,13 +18,12 @@ public class StudentManagement extends JFrame {
     private JTextField searchNameField;
 
     public StudentManagement() {
-        setTitle("Student Management");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(1200, 800);
-
+        setLayout(new BorderLayout());
         tableModel = new NonEditableTableModel(new Object[]{}, 0);
         csvTable = new JTable(tableModel);
         csvTable.setRowSelectionAllowed(true);
+        csvTable.setShowHorizontalLines(true);
+        csvTable.setShowVerticalLines(true);
 
         initializeComponents();
         loadDataFromCSV(csvPath);
@@ -40,7 +39,6 @@ public class StudentManagement extends JFrame {
         addButtonToPanel(buttonPanel, "Edit", this::editSelectedEntry);
         addButtonToPanel(buttonPanel, "Refresh", this::refreshTable);
         addButtonToPanel(buttonPanel, "Print", this::printCSV);
-        addButtonToPanel(buttonPanel, "Logout", this::logout);
 
         add(buttonPanel, BorderLayout.SOUTH);
 
@@ -251,13 +249,6 @@ public class StudentManagement extends JFrame {
         csvPrinter.printCSV(csvPath);
     }
 
-    private void logout(ActionEvent actionEvent) {
-        JOptionPane.showMessageDialog(null, "You have been successfully logged out.");
-        Login login = new Login();
-        login.setVisible(true);
-        dispose();
-    }
-
     private int findRowIndexByCourseCode(String courseCode) {
         for (int row = 0; row < tableModel.getRowCount(); row++) {
             if (tableModel.getValueAt(row, 0).toString().equals(courseCode)) {
@@ -295,13 +286,6 @@ public class StudentManagement extends JFrame {
 
     private void showError(String message) {
         JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-    }
-
-    public static void main() {
-        SwingUtilities.invokeLater(() -> {
-            StudentManagement app = new StudentManagement();
-            app.setVisible(true);
-        });
     }
 
     public static class NonEditableTableModel extends DefaultTableModel {

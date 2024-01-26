@@ -5,16 +5,14 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class AttendanceManagement extends JFrame {
+public class AttendanceManagement extends JPanel {
 
     private JTextArea notificationArea;
     private JButton markAttendanceButton;
     private JButton showCalendarButton;
 
     public AttendanceManagement() {
-        super("Attendance Management System");
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setSize(1200, 800);
+        setLayout(new BorderLayout());
 
         // Create components
         notificationArea = new JTextArea();
@@ -67,14 +65,5 @@ public class AttendanceManagement extends JFrame {
     private void displayNotification(String message) {
         String timeStamp = new SimpleDateFormat("HH:mm:ss").format(new Date());
         notificationArea.append("[" + timeStamp + "] " + message + "\n");
-    }
-
-    public static void main() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new AttendanceManagement().setVisible(true);
-            }
-        });
     }
 }

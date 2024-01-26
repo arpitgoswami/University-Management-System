@@ -1,3 +1,7 @@
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.FlatLightLaf;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -12,91 +16,111 @@ public class MainFrame extends JFrame {
         setTitle("Student Management System");
         setSize(1200, 800);
 
-        // Create sidebar with buttons for different functionalities
-        JPanel sidebar = new JPanel();
-        sidebar.setLayout(new GridLayout(10, 1));
-        sidebar.setPreferredSize(new Dimension(240, 0));
+        // Create tabbed pane
+        JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
 
-        JButton studentButton = createSidebarButton("Student Management");
-        JButton facultyButton = createSidebarButton("Faculty Management");
-        JButton courseButton = createSidebarButton("Course Management");
-        JButton attendanceButton = createSidebarButton("Attendance Management");
-        JButton feeButton = createSidebarButton("Fee Management");
+        JPanel dashboardPanel = new JPanel(new BorderLayout());
+        Dashboard dashboard = new Dashboard();
+        dashboardPanel.add(dashboard, BorderLayout.CENTER);
 
-        // Add action listeners to the buttons
-        studentButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                StudentManagement studentManagement = new StudentManagement();
-                studentManagement.main();
-            }
-        });
+        JPanel studentPanel = new JPanel(new BorderLayout());
+        StudentManagement studentManagement = new StudentManagement();
+        studentPanel.add(studentManagement, BorderLayout.CENTER);
 
-        facultyButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                FacultyManagement facultyManagement = new FacultyManagement();
-                facultyManagement.main();
-            }
-        });
+        JPanel facultyPanel = new JPanel(new BorderLayout());
+        FacultyManagement facultyManagement = new FacultyManagement();
+        facultyPanel.add(facultyManagement, BorderLayout.CENTER);
 
-        courseButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                CourseManagement courseManagement = new CourseManagement();
-                courseManagement.main();
-            }
-        });
+        JPanel coursePanel = new JPanel(new BorderLayout());
+        CourseManagement courseManagement = new CourseManagement();
+        coursePanel.add(courseManagement, BorderLayout.CENTER);
 
-        attendanceButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                AttendanceManagement attendanceManagement = new AttendanceManagement();
-                attendanceManagement.main();
-            }
-        });
+        JPanel attendancePanel = new JPanel(new BorderLayout());
+        AttendanceManagement attendanceManagement = new AttendanceManagement();
+        attendancePanel.add(attendanceManagement, BorderLayout.CENTER);
 
-        feeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                FeeManagement feeManagement = new FeeManagement();
-                feeManagement.main();
-            }
-        });
+        JPanel feePanel = new JPanel(new BorderLayout());
+        FeeManagement feeManagement = new FeeManagement();
+        feePanel.add(feeManagement, BorderLayout.CENTER);
 
-        sidebar.setBackground(Color.DARK_GRAY);
-        sidebar.setOpaque(true);
-
-        // Add buttons to the sidebar
-        sidebar.add(studentButton);
-        sidebar.add(facultyButton);
-        sidebar.add(courseButton);
-        sidebar.add(attendanceButton);
-        sidebar.add(feeButton);
+        tabbedPane.addTab("Dashboard", dashboardPanel);
+        tabbedPane.addTab("Student Management", studentPanel);
+        tabbedPane.addTab("Faculty Management", facultyPanel);
+        tabbedPane.addTab("Course Management", coursePanel);
+        tabbedPane.addTab("Attendance Management", attendancePanel);
+        tabbedPane.addTab("Fee Management", feePanel);
 
         // Create content panel with cards and notifications
         JPanel contentPanel = new JPanel(new BorderLayout());
-        contentPanel.setBorder(new EmptyBorder(10,10,10,10));
+        contentPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         setLayout(new BorderLayout());
-        add(sidebar, BorderLayout.WEST);
-        add(contentPanel, BorderLayout.CENTER);
+        add(tabbedPane, BorderLayout.CENTER);
 
+        // Create status bar
         StatusBar statusBar = new StatusBar();
         StatusBar.main(this);
-        contentPanel.add(statusBar.statusPanel, BorderLayout.NORTH);
+        add(statusBar.statusPanel, BorderLayout.NORTH);
 
-        Dashboard dashboard = new Dashboard();
-        contentPanel.add(dashboard, BorderLayout.CENTER);
+        // JMenuBar Initialization
+        JMenuBar menuBar = new JMenuBar();
+        JMenu themesMenu = new JMenu("Themes");
+        JMenu fileMenu = new JMenu("File");
+
+        JMenuItem intelliJItem = new JMenuItem("Flat IntelliJ");
+        JMenuItem darkItem = new JMenuItem("Flat Dark");
+        JMenuItem lightItem = new JMenuItem("Flat Light");
+
+        themesMenu.add(intelliJItem);
+        themesMenu.add(darkItem);
+        themesMenu.add(lightItem);
+
+        menuBar.add(fileMenu);
+        menuBar.add(themesMenu);
+        setJMenuBar(menuBar);
+
+        intelliJItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                changeTheme(0);
+            }
+        });
+
+        darkItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                changeTheme(1);
+            }
+        });
+
+        lightItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                changeTheme(2);
+            }
+        });
     }
 
-    private JButton createSidebarButton(String buttonText) {
-        JButton button = new JButton(buttonText);
-        button.setAlignmentX(Component.CENTER_ALIGNMENT);
-        return button;
+    private void changeTheme(int selectedIndex) {
+        try {
+            switch (selectedIndex) {
+                case 0:
+                    UIManager.setLookAndFeel(new FlatIntelliJLaf());
+                    break;
+                case 1:
+                    UIManager.setLookAndFeel(new FlatDarkLaf());
+                    break;
+                case 2:
+                    UIManager.setLookAndFeel(new FlatLightLaf());
+                    break;
+            }
+            SwingUtilities.updateComponentTreeUI(this);
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static void main(String[] args) {
+    public static void main() {
         SwingUtilities.invokeLater(() -> {
             new MainFrame().setVisible(true);
         });
