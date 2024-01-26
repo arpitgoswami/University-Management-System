@@ -25,7 +25,7 @@ public class Login {
 
     public Login() {
         try {
-            UIManager.setLookAndFeel(new FlatIntelliJLaf());
+            UIManager.setLookAndFeel(new FlatDarculaLaf());
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
@@ -34,6 +34,7 @@ public class Login {
         loginFrame.setTitle("Login Interface");
         loginFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         loginFrame.setSize(360, 570);
+        loginFrame.setResizable(false);
         //setUndecorated(true);
 
         // Image Creation

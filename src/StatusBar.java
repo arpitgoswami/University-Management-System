@@ -1,8 +1,12 @@
+import net.miginfocom.swing.MigLayout;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+
 
 public class StatusBar {
     public static JPanel statusPanel;
@@ -31,32 +35,29 @@ public class StatusBar {
     public static void main(MainFrame mainFrame){
         statusPanel = new JPanel();
         statusPanel.setLayout(new GridLayout(1,1));
-        statusPanel.setBorder(new EmptyBorder(10,10,10,10));
 
         JPanel statusLeftPanel = new JPanel();
-        statusLeftPanel.setLayout(new GridLayout(4,4));
+        statusLeftPanel.setLayout(new MigLayout("wrap 2", "[]20[]", "[][]"));
 
         Login login = new Login();
 
-        statusLeftPanel.add(new JLabel("Username: "));
-        statusLeftPanel.add(new JLabel(login.userName));
-        statusLeftPanel.add(new JLabel("Role:"));
-        statusLeftPanel.add(new JLabel(login.roleStatus));
+        statusLeftPanel.add(new JLabel("Username"));
+        statusLeftPanel.add(new JLabel(": login.userName"));
+        statusLeftPanel.add(new JLabel("Role"));
+        statusLeftPanel.add(new JLabel(": login.roleStatus"));
 
         // Server Status Remaning
-        statusLeftPanel.add(new JLabel("Server Status: "));
-        JLabel statusLabel = new JLabel(status ? "Running" : "Failed");
-        statusLeftPanel.add(statusLabel);
+        statusLeftPanel.add(new JLabel("Server Status"));
+        statusLeftPanel.add(new JLabel(status ? ": Running" : ": Failed"));
 
         // Update Status Remaning
-        statusLeftPanel.add(new JLabel("Update Status: "));
-        JLabel updateLabel = new JLabel(updateStatus ? "Up-to-date" : "Never Updated");
-        statusLeftPanel.add(updateLabel);
+        statusLeftPanel.add(new JLabel("Update Status"));
+        statusLeftPanel.add(new JLabel(updateStatus ? ": Up-to-date" : ": Never Updated"));
 
         statusPanel.add(statusLeftPanel);
 
         JPanel statusRightPanel = new JPanel();
-        statusRightPanel.setLayout(new GridLayout(2,4));
+        statusRightPanel.setLayout(new MigLayout("wrap 4"));
 
         JButton Help = new JButton("Help");
         Help.addActionListener(new ActionListener() {

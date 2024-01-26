@@ -15,6 +15,7 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Student Management System");
         setSize(1200, 800);
+        setLocationRelativeTo(null);
 
         // Create tabbed pane
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
@@ -50,17 +51,18 @@ public class MainFrame extends JFrame {
         tabbedPane.addTab("Attendance Management", attendancePanel);
         tabbedPane.addTab("Fee Management", feePanel);
 
-        // Create content panel with cards and notifications
-        JPanel contentPanel = new JPanel(new BorderLayout());
-        contentPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+        tabbedPane.setBorder(new EmptyBorder(10,10,10,10));
 
         setLayout(new BorderLayout());
         add(tabbedPane, BorderLayout.CENTER);
 
-        // Create status bar
-        StatusBar statusBar = new StatusBar();
-        StatusBar.main(this);
-        add(statusBar.statusPanel, BorderLayout.NORTH);
+        // Create Header
+        Header header = new Header();
+        add(header, BorderLayout.NORTH);
+
+        // Create Footer
+        Footer footer = new Footer();
+        add(footer, BorderLayout.SOUTH);
 
         // JMenuBar Initialization
         JMenuBar menuBar = new JMenuBar();
