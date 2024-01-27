@@ -6,15 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="fb63453f-e9e5-42be-b924-543e99b4744c" name="Changes" comment="Development Commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Simple.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Simple.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/csv/registration.csv" beforeDir="false" afterPath="$PROJECT_DIR$/csv/registration.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/csv/students.csv" beforeDir="false" afterPath="$PROJECT_DIR$/csv/students.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Simple/Login.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/Login.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Simple/MainFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/MainFrame$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Simple/MainFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/MainFrame$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Simple/MainFrame$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/MainFrame$3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Simple/MainFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/MainFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dashboard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Header.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Header.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/StatusBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StatusBar.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +72,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.Login">
+  <component name="RunManager" selected="Application.MainFrame">
     <configuration name="CourseManagement" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="CourseManagement" />
       <module name="Simple" />

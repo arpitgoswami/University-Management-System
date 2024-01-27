@@ -21,6 +21,9 @@ public class MainFrame extends JFrame {
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
 
         JPanel dashboardPanel = new JPanel(new BorderLayout());
+        //Dashboard dashboard = new Dashboard();
+        //dashboardPanel.add(dashboard, BorderLayout.CENTER);
+
         Dashboard dashboard = new Dashboard();
         dashboardPanel.add(dashboard, BorderLayout.CENTER);
 
@@ -122,7 +125,7 @@ public class MainFrame extends JFrame {
         }
     }
 
-    public static void main() {
+    public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             new MainFrame().setVisible(true);
         });

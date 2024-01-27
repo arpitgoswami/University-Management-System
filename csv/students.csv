@@ -1,26 +1,27 @@
 ID,Name,Gender,Birthdate,AdmissionDate,Department,Semester,Units,ContactNumber
 1,John Doe,Male,1995-07-15,2021-09-01,Computer Science,4,10,1234567890
-2,Jane Smith,Female,1998-03-20,2020-12-15,Mathematics,5,15,9876543210
-3,Alice Johnson,Female,1997-11-02,2022-01-10,Physics,3,5,5555555555
+2,Jane Smith,Female,1998-03-20,2020-12-15,Mechanical,5,15,9876543210
+3,Alice Johnson,Female,1997-11-02,2022-01-10,Pharmacy,3,5,5555555555
 4,Bob Anderson,Male,1996-08-25,2021-05-20,Chemistry,6,20,7777777777
 5,Emily Davis,Female,1999-01-30,2023-02-28,Biology,2,8,9999999999
 6,Michael Brown,Male,1994-12-10,2020-08-05,Engineering,7,25,4444444444
 7,Sophia Miller,Female,1997-05-18,2021-11-11,History,3,10,6666666666
-8,William Wilson,Male,1993-10-22,2022-06-12,Geography,5,12,2222222222
-9,Olivia Martinez,Female,1996-06-05,2020-04-03,Psychology,6,18,8888888888
+8,William Wilson,Male,1993-10-22,2022-06-12,Electrical,5,12,2222222222
+9,Olivia Martinez,Female,1996-06-05,2020-04-03,Computer Science,6,18,8888888888
+10,Natalie Turner,Female,1998-07-12,2023-01-08,BHU,4,14,1234567890
 11,Lucy Harris,Female,1997-08-08,2022-12-09,Sociology,5,7,3333333333
 12,Andrew Clark,Male,1995-04-25,2021-10-02,Economics,6,11,5555555555
 13,Grace Lee,Female,1994-03-27,2020-05-07,Political Science,3,9,7777777777
 14,Daniel Rodriguez,Male,1999-11-14,2023-03-17,Anthropology,7,14,9999999999
 15,Chloe White,Female,1996-01-19,2021-07-22,Communications,2,6,2222222222
-16,Ethan Scott,Male,1998-02-28,2020-09-30,Fine Arts,4,18,4444444444
-17,Mia Green,Female,1997-06-11,2022-11-08,Music,5,22,6666666666
-18,Alexander Hall,Male,1994-09-03,2021-04-04,Physics,6,11,8888888888
+16,Ethan Scott,Male,1998-02-28,2020-09-30,Pharmacy,4,18,4444444444
+17,Mia Green,Female,1997-06-11,2022-11-08,History,5,22,6666666666
+18,Alexander Hall,Male,1994-09-03,2021-04-04,Mechanical,6,11,8888888888
 19,Ella Adams,Female,1999-10-05,2023-08-15,Chemistry,7,15,1111111111
 20,Liam King,Male,1995-12-28,2020-10-25,Biology,3,8,3333333333
 21,Amelia Wright,Female,1997-04-17,2022-05-19,Engineering,4,20,5555555555
 22,Logan Parker,Male,1996-08-09,2021-02-14,History,5,14,7777777777
-23,Harper Evans,Female,1998-01-07,2020-07-28,Geography,6,12,9999999999
+23,Harper Evans,Female,1998-01-07,2020-07-28,Electrical,6,12,9999999999
 24,Noah Gonzalez,Male,1994-05-23,2023-03-05,Psychology,7,9,2222222222
 25,Avery Lopez,Female,1999-09-20,2021-09-17,English Literature,2,17,4444444444
 26,Sofia Hill,Female,1996-07-02,2022-10-13,Sociology,3,21,6666666666
@@ -28,14 +29,14 @@ ID,Name,Gender,Birthdate,AdmissionDate,Department,Semester,Units,ContactNumber
 28,Evelyn Perry,Female,1997-03-08,2023-11-26,Political Science,5,16,1111111111
 29,Carter Long,Male,1998-11-21,2021-12-24,Anthropology,6,11,3333333333
 30,Scarlett Campbell,Female,1995-12-03,2020-04-05,Communications,7,7,5555555555
-31,Luke Mitchell,Male,1999-06-28,2022-05-09,Fine Arts,2,13,7777777777
+31,Luke Mitchell,Male,1999-06-28,2022-05-09,Pharmacy,2,13,7777777777
 32,Aria Young,Female,1996-10-11,2021-01-13,Music,3,19,9999999999
 33,Dylan Diaz,Male,1994-04-19,2023-09-22,Physics,4,14,2222222222
 34,Layla Collins,Female,1997-08-15,2020-07-05,Chemistry,5,18,4444444444
 35,Grayson Bailey,Male,1998-01-06,2022-04-30,Biology,6,9,6666666666
 36,Stella Rivera,Female,1995-05-27,2021-10-17,Engineering,7,22,8888888888
 37,Lincoln Cooper,Male,1999-09-13,2020-11-12,History,2,10,1111111111
-38,Penelope Ward,Female,1996-07-31,2022-03-16,Geography,3,15,3333333333
+38,Penelope Ward,Female,1996-07-31,2022-03-16,Computer Science,3,15,3333333333
 39,Kayden Torres,Male,1994-02-14,2021-05-18,Psychology,4,20,5555555555
 40,Isabella Ramirez,Female,1997-03-22,2020-09-27,English Literature,5,13,7777777777
 41,Nathan Gray,Male,1995-12-30,2023-06-14,Sociology,6,17,9999999999
@@ -43,8 +44,58 @@ ID,Name,Gender,Birthdate,AdmissionDate,Department,Semester,Units,ContactNumber
 43,Levi Morgan,Male,1996-10-02,2020-12-28,Political Science,2,11,4444444444
 44,Hannah Bennett,Female,1999-05-08,2022-07-09,Anthropology,3,14,6666666666
 45,David Coleman,Male,1994-04-13,2021-01-15,Communications,4,16,8888888888
-46,Samantha Barnes,Female,1997-08-28,2023-09-08,Fine Arts,5,21,1111111111
+46,Samantha Barnes,Female,1997-08-28,2023-09-08,Mechanical,5,21,1111111111
 47,Owen Howard,Male,1995-09-24,2020-08-03,Music,6,9,3333333333
-48,Victoria Grayson,Female,1998-03-17,2021-05-21,Physics,7,17,5555555555
-49,Christian Foster,Male,1996-12-07,2020-10-08,Chemistry,2,15,7777777777
-50,Savannah Watson,Female,1999-01-23,2022-11-19,Biology,3,20,9999999999
+48,Victoria Grayson,Female,1998-03-17,2021-05-21,Computer Science,7,17,5555555555
+49,Christian Foster,Male,1996-12-07,2020-10-08,Civil,2,15,7777777777
+50,Savannah Watson,Female,1999-01-23,2022-11-19,Electrical,3,20,9999999999
+51,Abigail Reed,Female,1997-04-05,2022-08-18,Computer Science,4,12,1234567890
+52,Nolan Turner,Male,1996-09-12,2021-03-29,Civil,5,16,9876543210
+53,Lily Wright,Female,1998-07-28,2020-10-14,BHU,3,8,5555555555
+54,Caleb Bennett,Male,1995-11-15,2023-02-07,Mechanical,6,21,7777777777
+55,Aria Watson,Female,1999-02-22,2021-05-02,Electrical,2,10,9999999999
+56,Isaac Taylor,Male,1994-06-11,2022-09-25,Computer Science,7,15,4444444444
+57,Scarlett Torres,Female,1997-09-30,2020-11-20,Pharmacy,3,17,6666666666
+58,Elijah Garcia,Male,1998-01-14,2021-12-30,Computer Science,5,19,2222222222
+59,Grace Turner,Female,1996-12-08,2023-03-03,Electrical,6,22,8888888888
+60,Owen Evans,Male,1995-03-21,2020-04-15,Civil,7,13,1111111111
+61,Chloe Clark,Female,1999-08-18,2022-06-22,Mechanical,2,18,3333333333
+62,Landon Hill,Male,1997-07-03,2021-10-08,History,3,11,5555555555
+63,Lucy Davis,Female,1996-11-24,2020-12-19,Economics,4,14,7777777777
+64,Nathan Rodriguez,Male,1998-05-09,2023-01-02,Sociology,5,20,9999999999
+65,Ava Lewis,Female,1995-10-12,2021-07-26,Anthropology,6,10,2222222222
+66,Carter Martin,Male,1994-07-28,2022-03-14,Communications,7,16,4444444444
+67,Sophie Wright,Female,1999-06-03,2020-08-02,Fine Arts,2,12,6666666666
+68,Liam Clark,Male,1997-01-21,2022-11-11,Music,3,20,8888888888
+69,Aria Perez,Female,1996-04-15,2020-09-10,Physics,4,15,1111111111
+70,Ethan Miller,Male,1998-09-08,2023-08-30,Chemistry,5,18,3333333333
+71,Amelia White,Female,1995-12-30,2021-10-18,Biology,6,9,5555555555
+72,Oliver Wilson,Male,1999-04-23,2022-07-01,Engineering,7,23,7777777777
+73,Isabella Smith,Female,1996-08-07,2020-09-12,Geography,2,10,9999999999
+74,Lucas Johnson,Male,1997-03-19,2022-12-05,Psychology,3,14,2222222222
+75,Charlotte Davis,Female,1994-02-28,2021-01-25,English Literature,4,16,4444444444
+76,Logan Martinez,Male,1999-10-15,2023-09-12,Sociology,5,21,6666666666
+77,Ella Turner,Female,1995-11-02,2020-12-08,Economics,6,17,8888888888
+78,Noah Harris,Male,1998-09-14,2021-04-03,Political Science,7,19,1111111111
+79,Avery Taylor,Female,1996-07-09,2022-05-28,Anthropology,2,11,3333333333
+80,Leo Brown,Male,1997-05-25,2020-11-09,Communications,3,15,5555555555
+81,Sophia Hill,Female,1994-12-18,2023-03-18,Fine Arts,4,20,7777777777
+82,Elijah Parker,Male,1999-08-31,2021-06-14,Music,5,14,9999999999
+83,Mia Gonzalez,Female,1996-03-17,2022-08-01,Physics,6,11,2222222222
+84,Liam Scott,Male,1998-10-29,2020-09-23,Chemistry,7,15,4444444444
+85,Ava Adams,Female,1995-09-08,2023-01-30,Biology,2,8,6666666666
+86,Oliver Mitchell,Male,1997-12-24,2020-07-18,Engineering,3,21,8888888888
+87,Chloe Foster,Female,1996-04-05,2022-10-09,History,4,10,1111111111
+88,Ethan Collins,Male,1999-01-16,2021-11-19,Geography,5,12,3333333333
+89,Aria Harris,Female,1994-08-22,2020-04-27,Psychology,6,18,5555555555
+90,Lucas White,Male,1997-02-11,2023-07-15,English Literature,7,7,7777777777
+91,Isabella Adams,Female,1996-05-20,2021-09-01,Sociology,2,13,9999999999
+92,Leo Harris,Male,1998-11-01,2022-12-15,Economics,3,19,2222222222
+93,Mia Wilson,Female,1995-01-14,2020-04-10,Political Science,4,14,4444444444
+94,Aiden Clark,Male,1999-07-22,2023-08-15,Anthropology,5,16,6666666666
+95,Emma Turner,Female,1996-06-05,2020-10-25,Communications,6,11,8888888888
+96,Liam Parker,Male,1997-03-28,2022-05-09,Fine Arts,7,17,1111111111
+97,Sophie Adams,Female,1994-09-14,2021-01-13,Music,2,19,3333333333
+98,Noah Harris,Male,1998-12-20,2023-09-22,Physics,3,14,5555555555
+99,Olivia Wright,Female,1996-05-15,2020-07-05,Chemistry,4,18,7777777777
+100,Aiden Davis,Male,1999-02-06,2022-04-30,Biology,5,9,9999999999

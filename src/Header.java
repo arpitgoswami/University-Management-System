@@ -3,6 +3,8 @@ import com.sun.tools.javac.Main;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.awt.event.ActionEvent;
 import java.time.format.DateTimeFormatter;
@@ -156,12 +158,15 @@ public class Header extends javax.swing.JPanel {
             }
         });
         timer.start();
-        lastValue.setText(": " + currentTimeValue.format(formatter) + " | " + "24:00 HF" + " | " + "India Standard Time");
+        LocalDate currentDate = LocalDate.now();
+        DayOfWeek dayOfWeek = currentDate.getDayOfWeek();
+        capitalizedDay = dayOfWeek.name().substring(0, 1) + dayOfWeek.name().substring(1).toLowerCase();
+        lastValue.setText(": " + currentTimeValue.format(formatter) + " | " + currentDate + " | " + capitalizedDay);
     }
 
     private void updateCurrentTime() {
         LocalTime currentTimeValue = LocalTime.now();
-        currentValue.setText(": " + currentTimeValue.format(formatter) + " | " + "24:00 HF" + " | " + "India Standard Time");
+        currentValue.setText(": " + currentTimeValue.format(formatter) + " | " + "Indian Standard Time Zone");
     }
 
     // Variables declaration - do not modify
@@ -174,6 +179,7 @@ public class Header extends javax.swing.JPanel {
     private javax.swing.JButton profile;
     private javax.swing.JButton update;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+    private String capitalizedDay;
     LocalTime currentTimeValue = LocalTime.now();
     // End of variables declaration
 

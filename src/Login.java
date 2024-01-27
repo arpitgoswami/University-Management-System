@@ -25,7 +25,7 @@ public class Login {
 
     public Login() {
         try {
-            UIManager.setLookAndFeel(new FlatDarculaLaf());
+            UIManager.setLookAndFeel(new FlatIntelliJLaf());
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
@@ -119,7 +119,7 @@ public class Login {
             MainFrame mainFrame = new MainFrame();
             roleStatus = role;
             userName = username;
-            mainFrame.main();
+            //mainFrame.main();
             loginFrame.dispose();
         } else {
             showError("Invalid login credentials");
