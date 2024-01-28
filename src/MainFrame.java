@@ -1,6 +1,7 @@
+import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
-import com.formdev.flatlaf.FlatLightLaf;
+import com.sun.tools.javac.Main;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -70,17 +71,13 @@ public class MainFrame extends JFrame {
         // JMenuBar Initialization
         JMenuBar menuBar = new JMenuBar();
         JMenu themesMenu = new JMenu("Themes");
-        JMenu fileMenu = new JMenu("File");
 
-        JMenuItem intelliJItem = new JMenuItem("Flat IntelliJ");
-        JMenuItem darkItem = new JMenuItem("Flat Dark");
-        JMenuItem lightItem = new JMenuItem("Flat Light");
+        JMenuItem intelliJItem = new JMenuItem("IntelliJ Theme");
+        JMenuItem darkItem = new JMenuItem("Dracula Theme");
 
         themesMenu.add(intelliJItem);
         themesMenu.add(darkItem);
-        themesMenu.add(lightItem);
 
-        menuBar.add(fileMenu);
         menuBar.add(themesMenu);
         setJMenuBar(menuBar);
 
@@ -90,18 +87,10 @@ public class MainFrame extends JFrame {
                 changeTheme(0);
             }
         });
-
         darkItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 changeTheme(1);
-            }
-        });
-
-        lightItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                changeTheme(2);
             }
         });
     }
@@ -113,10 +102,7 @@ public class MainFrame extends JFrame {
                     UIManager.setLookAndFeel(new FlatIntelliJLaf());
                     break;
                 case 1:
-                    UIManager.setLookAndFeel(new FlatDarkLaf());
-                    break;
-                case 2:
-                    UIManager.setLookAndFeel(new FlatLightLaf());
+                    UIManager.setLookAndFeel(new FlatDarculaLaf());
                     break;
             }
             SwingUtilities.updateComponentTreeUI(this);

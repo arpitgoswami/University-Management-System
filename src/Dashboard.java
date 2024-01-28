@@ -285,7 +285,7 @@ public class Dashboard extends javax.swing.JPanel {
 
         databasePanel.setLayout(new MigLayout("wrap 4", "[][]20[][]"));
 
-        // Total Students
+        // Database Panel
         databasePanel.add(new JLabel("<html><b> ** Student Courses -</b></html>"), "wrap");
         databasePanel.add(new JLabel("Computer Science Students"));
         databasePanel.add(new JLabel(countMatchingRecords("./csv/students.csv", "Computer Science", 5)));
@@ -317,6 +317,28 @@ public class Dashboard extends javax.swing.JPanel {
         databasePanel.add(new JLabel(countMatchingRecords("./csv/fees.csv", "Paid", 4)));
         databasePanel.add(new JLabel("Fee Pending"));
         databasePanel.add(new JLabel(countMatchingRecords("./csv/fees.csv", "Pending", 4)));
+
+        // University Panel
+        universityPanel.setLayout(new MigLayout("wrap 4", "[][]20[][]"));
+        universityPanel.add(new JLabel("Example Title"));
+        universityPanel.add(new JLabel("Usage"));
+        universityPanel.add(new JLabel("Example Title"));
+        universityPanel.add(new JLabel("Usage"));
+
+        universityPanel.add(new JLabel("Example Title"));
+        universityPanel.add(new JLabel("Usage"));
+        universityPanel.add(new JLabel("Example Title"));
+        universityPanel.add(new JLabel("Usage"));
+
+        universityPanel.add(new JLabel("Example Title"));
+        universityPanel.add(new JLabel("Usage"));
+        universityPanel.add(new JLabel("Example Title"));
+        universityPanel.add(new JLabel("Usage"));
+
+        universityPanel.add(new JLabel("Example Title"));
+        universityPanel.add(new JLabel("Usage"));
+        universityPanel.add(new JLabel("Example Title"));
+        universityPanel.add(new JLabel("Usage"));
     }
 
     public static String countMatchingRecords(String filePath, String searchString, int columnNumber) throws IOException {

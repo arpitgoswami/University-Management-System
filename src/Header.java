@@ -1,7 +1,4 @@
-import com.sun.tools.javac.Main;
-
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionListener;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -11,9 +8,6 @@ import java.time.format.DateTimeFormatter;
 
 public class Header extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Header
-     */
     public Header() {
         initComponents();
         init();
@@ -34,7 +28,7 @@ public class Header extends javax.swing.JPanel {
         lastValue = new javax.swing.JLabel();
         help = new javax.swing.JButton();
         profile = new javax.swing.JButton();
-        update = new javax.swing.JButton();
+        reload = new javax.swing.JButton();
         logout = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 0, 51));
@@ -64,10 +58,10 @@ public class Header extends javax.swing.JPanel {
             }
         });
 
-        update.setText("Update");
-        update.addActionListener(new java.awt.event.ActionListener() {
+        reload.setText("Reload");
+        reload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateActionPerformed(evt);
+                reloadActionPerformed(evt);
             }
         });
 
@@ -97,7 +91,7 @@ public class Header extends javax.swing.JPanel {
                                                 .addComponent(profile))
                                         .addComponent(currentValue))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(update)
+                                .addComponent(reload)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(logout)
                                 .addContainerGap())
@@ -117,7 +111,7 @@ public class Header extends javax.swing.JPanel {
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(update)
+                                        .addComponent(reload)
                                         .addComponent(logout)
                                         .addComponent(profile)
                                         .addComponent(help))
@@ -129,8 +123,12 @@ public class Header extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, helpContent);
     }
 
-    private void updateActionPerformed(java.awt.event.ActionEvent evt) {
-        JOptionPane.showMessageDialog(null, "Update Here!");
+    private void reloadActionPerformed(java.awt.event.ActionEvent evt) {
+        MainFrame mainFrame = (MainFrame) SwingUtilities.getWindowAncestor(this);
+        mainFrame.dispose();
+        MainFrame reloadedFrame = new MainFrame();
+        reloadedFrame.setVisible(true);
+        JOptionPane.showMessageDialog(null, "Window has been reloaded!");
     }
 
     private void profileActionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,11 +148,11 @@ public class Header extends javax.swing.JPanel {
     }
 
     private void init() {
-        // Create a Timer to update the time every second
+        // Create a Timer to reload the time every second
         Timer timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                updateCurrentTime();
+                reloadCurrentTime();
             }
         });
         timer.start();
@@ -164,7 +162,7 @@ public class Header extends javax.swing.JPanel {
         lastValue.setText(": " + currentTimeValue.format(formatter) + " | " + currentDate + " | " + capitalizedDay);
     }
 
-    private void updateCurrentTime() {
+    private void reloadCurrentTime() {
         LocalTime currentTimeValue = LocalTime.now();
         currentValue.setText(": " + currentTimeValue.format(formatter) + " | " + "Indian Standard Time Zone");
     }
@@ -177,7 +175,7 @@ public class Header extends javax.swing.JPanel {
     private javax.swing.JLabel lastValue;
     private javax.swing.JButton logout;
     private javax.swing.JButton profile;
-    private javax.swing.JButton update;
+    private javax.swing.JButton reload;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     private String capitalizedDay;
     LocalTime currentTimeValue = LocalTime.now();
@@ -196,7 +194,7 @@ public class Header extends javax.swing.JPanel {
             "&nbsp;&nbsp;&nbsp;&nbsp; - Describe the main elements of the user dashboard.<br>" +
             "&nbsp;&nbsp;&nbsp;&nbsp; - Highlight key features and navigation options.<br><br>" +
             "<b>Profile Management</b>:<br>" +
-            "&nbsp;&nbsp;&nbsp;&nbsp; - Explain how users can update their profiles.<br>" +
+            "&nbsp;&nbsp;&nbsp;&nbsp; - Explain how users can reload their profiles.<br>" +
             "&nbsp;&nbsp;&nbsp;&nbsp; - Provide guidance on changing passwords and other account settings.<br><br>" +
             "<b>Attendance Tracking</b>:<br>" +
             "&nbsp;&nbsp;&nbsp;&nbsp; - Detail how to record and view student attendance.<br>" +
