@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="miglayout-core-11.3">
+  <library name="jsvg-1.2.0">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/libraries/miglayout-core-11.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libraries/jsvg-1.2.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

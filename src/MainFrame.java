@@ -1,5 +1,4 @@
 import com.formdev.flatlaf.FlatDarculaLaf;
-import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.sun.tools.javac.Main;
 
@@ -12,9 +11,8 @@ import java.awt.event.ActionListener;
 public class MainFrame extends JFrame {
 
     public MainFrame() {
-        super("University Management System");
+        setTitle("University Management System");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Student Management System");
         setSize(1200, 800);
         setLocationRelativeTo(null);
 
@@ -22,9 +20,6 @@ public class MainFrame extends JFrame {
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
 
         JPanel dashboardPanel = new JPanel(new BorderLayout());
-        //Dashboard dashboard = new Dashboard();
-        //dashboardPanel.add(dashboard, BorderLayout.CENTER);
-
         Dashboard dashboard = new Dashboard();
         dashboardPanel.add(dashboard, BorderLayout.CENTER);
 
@@ -58,7 +53,9 @@ public class MainFrame extends JFrame {
         tabbedPane.setBorder(new EmptyBorder(10,10,10,10));
 
         setLayout(new BorderLayout());
-        add(tabbedPane, BorderLayout.CENTER);
+        //add(tabbedPane, BorderLayout.CENTER);
+        MainFrame2 mainFrame2 = new MainFrame2();
+        add(mainFrame2, BorderLayout.CENTER);
 
         // Create Header
         Header header = new Header();

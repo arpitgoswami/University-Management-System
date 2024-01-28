@@ -5,16 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fb63453f-e9e5-42be-b924-543e99b4744c" name="Changes" comment="Development Commit">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/miglayout_core_11_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/svg_salamander_1_1_2_2.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Simple.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Simple.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/csv/registration.csv" beforeDir="false" afterPath="$PROJECT_DIR$/csv/registration.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Simple/MainFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/MainFrame$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Simple/MainFrame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/MainFrame$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Simple/MainFrame$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Simple/MainFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Simple/MainFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dashboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dashboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Header.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Header.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/csv/file.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simple/AttendanceManagement$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simple/AttendanceManagement$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simple/AttendanceManagement.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simple/Login.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simple/MainFrame$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simple/MainFrame$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simple/MainFrame.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Simple/StudentManagement.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SVGicon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SVGicon.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,22 +67,15 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "branch",
-    "last_opened_file_path": "C:/Users/deepi/OneDrive/Desktop/svg-salamander-1.1.2.2.jar",
+    "last_opened_file_path": "C:/Users/deepi/OneDrive/Documents/GitHub/java-app/libraries/jsvg-1.2.0.jar",
     "onboarding.tips.debug.path": "C:/Users/deepi/Documents/Simple/src/Main.java",
     "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
+    "project.structure.proportion": "0.15429688",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
-  <component name="RunManager">
-    <configuration name="CourseManagement" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="CourseManagement" />
-      <module name="Simple" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Application.MainFrame">
     <configuration name="Login" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Login" />
       <module name="Simple" />
@@ -93,7 +91,6 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.CourseManagement" />
       <item itemvalue="Application.Login" />
       <item itemvalue="Application.MainFrame" />
     </list>

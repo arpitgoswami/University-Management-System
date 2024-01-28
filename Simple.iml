@@ -7,9 +7,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="flatlaf-3.0" level="project" />
     <orderEntry type="library" name="miglayout-swing-11.3" level="project" />
     <orderEntry type="library" name="miglayout-core-11.3" level="project" />
-    <orderEntry type="library" name="svg-salamander-1.1.2.2" level="project" />
+    <orderEntry type="library" name="flatlaf-3.0" level="project" />
+    <orderEntry type="library" name="flatlaf-extras-3.3" level="project" />
+    <orderEntry type="library" name="jsvg-1.2.0" level="project" />
   </component>
 </module>
