@@ -1,7 +1,6 @@
-import com.formdev.flatlaf.FlatDarculaLaf;
-import com.formdev.flatlaf.FlatDarkLaf;
+package frames;
+
 import com.formdev.flatlaf.FlatIntelliJLaf;
-import com.formdev.flatlaf.FlatLightLaf;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -9,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.*;
 
-public class Login {
+public class LoginFrame {
 
     private final JTextField usernameField;
     private final JPasswordField passwordField;
@@ -23,7 +22,7 @@ public class Login {
 
     private static final String CSV_FILE_PATH = "./csv/registration.csv";
 
-    public Login() {
+    public LoginFrame() {
         try {
             UIManager.setLookAndFeel(new FlatIntelliJLaf());
         } catch (UnsupportedLookAndFeelException e) {
@@ -165,7 +164,7 @@ public class Login {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            Login frame = new Login();
+            LoginFrame frame = new LoginFrame();
             frame.loginFrame.setVisible(true);
         });
     }

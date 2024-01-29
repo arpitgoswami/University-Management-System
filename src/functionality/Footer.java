@@ -1,3 +1,5 @@
+package functionality;
+
 public class Footer extends javax.swing.JPanel {
 
     /**
@@ -91,8 +93,8 @@ public class Footer extends javax.swing.JPanel {
     }// </editor-fold>
 
     private void init() {
-        userName.setText(Login.userName);
-        role.setText(Login.roleStatus);
+        //userName.setText(Login.userName);
+        //role.setText(Login.roleStatus);
         serverStatus.setText(serverCheck ? "Server Running" : "Server Failed");
         updateStatus.setText(updateCheck ? "Up-to-date" : "Lately Updated");
         versionControl.setText("Software Version 1.0");

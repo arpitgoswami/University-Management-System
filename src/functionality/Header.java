@@ -1,3 +1,7 @@
+package functionality;
+
+import frames.LoginFrame;
+import frames.MainFrame;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.time.DayOfWeek;
@@ -138,12 +142,12 @@ public class Header extends javax.swing.JPanel {
     private void logoutActionPerformed(java.awt.event.ActionEvent evt) {
         JOptionPane.showMessageDialog(null, "You have been successfully logged out.");
 
-        // Close the MainFrame
+        // Close the frames.MainFrame
         MainFrame mainFrame = (MainFrame) SwingUtilities.getWindowAncestor(this);
         mainFrame.dispose();
 
         // Open the Login frame
-        Login login = new Login();
+        LoginFrame login = new LoginFrame();
         login.loginFrame.setVisible(true);
     }
 
@@ -190,7 +194,7 @@ public class Header extends javax.swing.JPanel {
             "<b>User Registration and Login</b>:<br>" +
             "&nbsp;&nbsp;&nbsp;&nbsp; - To register, go to the registration page and fill in the required information.<br>" +
             "&nbsp;&nbsp;&nbsp;&nbsp; - After registration, log in with your credentials on the login page.<br><br>" +
-            "<b>Dashboard Overview</b>:<br>" +
+            "<b>components.Dashboard Overview</b>:<br>" +
             "&nbsp;&nbsp;&nbsp;&nbsp; - Describe the main elements of the user dashboard.<br>" +
             "&nbsp;&nbsp;&nbsp;&nbsp; - Highlight key features and navigation options.<br><br>" +
             "<b>Profile Management</b>:<br>" +

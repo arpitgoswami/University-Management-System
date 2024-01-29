@@ -1,4 +1,7 @@
+package frames;
+
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import components.*;
 
 import javax.swing.*;
 import java.awt.*;

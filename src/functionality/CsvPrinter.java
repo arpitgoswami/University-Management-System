@@ -1,3 +1,5 @@
+package functionality;
+
 import java.awt.*;
 import java.awt.print.*;
 import java.io.BufferedReader;

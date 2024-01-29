@@ -1,6 +1,10 @@
+package frames;
+
 import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
-import com.sun.tools.javac.Main;
+import components.*;
+import functionality.Footer;
+import functionality.Header;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -43,7 +47,7 @@ public class MainFrame extends JFrame {
         FeeManagement feeManagement = new FeeManagement();
         feePanel.add(feeManagement, BorderLayout.CENTER);
 
-        tabbedPane.addTab("Dashboard", dashboardPanel);
+        tabbedPane.addTab("components.Dashboard", dashboardPanel);
         tabbedPane.addTab("Student Management", studentPanel);
         tabbedPane.addTab("Faculty Management", facultyPanel);
         tabbedPane.addTab("Course Management", coursePanel);
@@ -57,11 +61,11 @@ public class MainFrame extends JFrame {
         MainFrame2 mainFrame2 = new MainFrame2();
         add(mainFrame2, BorderLayout.CENTER);
 
-        // Create Header
+        // Create functionalities.Header
         Header header = new Header();
         add(header, BorderLayout.NORTH);
 
-        // Create Footer
+        // Create functionalities.Footer
         Footer footer = new Footer();
         add(footer, BorderLayout.SOUTH);
 

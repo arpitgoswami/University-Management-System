@@ -1,3 +1,6 @@
+package components;
+
+import functionality.CsvPrinter;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -9,17 +12,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Vector;
 
-public class FacultyManagement extends JPanel {
+public class StudentManagement extends JPanel {
 
-    public String csvPath = "./csv/faculty.csv";
-    private NonEditableTableModel tableModel;
-    private JTable csvTable;
+    public String csvPath = "./csv/students.csv";
+    private final NonEditableTableModel tableModel;
+    private final JTable csvTable;
     private JTextField searchField;
     private JTextField searchNameField;
 
-    public FacultyManagement() {
+    public StudentManagement() {
         setLayout(new BorderLayout());
-
         tableModel = new NonEditableTableModel(new Object[]{}, 0);
         csvTable = new JTable(tableModel);
         csvTable.setRowSelectionAllowed(true);
