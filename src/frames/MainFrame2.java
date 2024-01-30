@@ -231,10 +231,10 @@ public class MainFrame2 extends javax.swing.JPanel {
     private void settingBtnActionPerformed(java.awt.event.ActionEvent evt) {
         contentPanel.removeAll();
         contentPanel.add(dashboard, BorderLayout.CENTER);
-        contentPanel.setSize(200,400);
+        contentPanel.setSize(200, 400);
     }
 
-    private void init(){
+    private void init() {
         contentPanel.add(dashboard, BorderLayout.CENTER);
     }
 

@@ -55,7 +55,7 @@ public class Dashboard extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1000, 700));
 
         dashboardLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        dashboardLabel.setText("components.Dashboard Panel");
+        dashboardLabel.setText("Dashboard Panel");
 
         card1.setBackground(new java.awt.Color(255, 204, 51));
         card1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
