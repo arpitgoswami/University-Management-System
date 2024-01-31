@@ -3,4 +3,4 @@ This Java management project is a small-scale application developed using Java t
 
 
 # Application Screenshot
-![Screenshot 2024-01-30 164440](https://github.com/arpitgoswami/java-app/assets/71710858/ae654848-4cf0-419b-81e2-8f9901c5083f)
+![Screenshot 2024-01-31 174458](https://github.com/arpitgoswami/java-app/assets/71710858/6acef456-da8e-419b-8845-08a4f80c21af)
