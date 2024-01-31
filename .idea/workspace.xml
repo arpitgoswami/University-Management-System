@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb63453f-e9e5-42be-b924-543e99b4744c" name="Changes" comment="Development Commit" />
+    <list default="true" id="fb63453f-e9e5-42be-b924-543e99b4744c" name="Changes" comment="Development Commit">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dashboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dashboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frames/LoginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/LoginFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frames/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/MainFrame.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -59,7 +64,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.MainFrame">
+  <component name="RunManager" selected="Application.Login">
     <configuration name="Login" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="frames.LoginFrame" />
       <module name="Simple" />

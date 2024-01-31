@@ -334,6 +334,8 @@ public class Dashboard extends javax.swing.JPanel {
 
         // Login Activity
         JTable table = readCSVFile("./csv/login.csv");
+        table.setShowVerticalLines(true);
+        table.setShowHorizontalLines(true);
 
         JScrollPane scrollPane = new JScrollPane(table);
 
