@@ -7,8 +7,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
-public class MainFrame2 extends javax.swing.JPanel {
+public class MainFrame2 extends JPanel {
 
+    JScrollPane scrollPane = new JScrollPane();
     Dashboard dashboard = new Dashboard();
     StudentManagement studentManagement = new StudentManagement();
     FacultyManagement facultyManagement = new FacultyManagement();
@@ -199,8 +200,10 @@ public class MainFrame2 extends javax.swing.JPanel {
     }// </editor-fold>
 
     private void dashboardBtnActionPerformed(java.awt.event.ActionEvent evt) {
-        contentPanel.removeAll();
-        contentPanel.add(dashboard, BorderLayout.CENTER);
+        scrollPane.setPreferredSize(new Dimension(1,200));
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setViewportView(dashboard);
+        contentPanel.add(scrollPane, BorderLayout.CENTER);
     }
 
     private void studentBtnActionPerformed(java.awt.event.ActionEvent evt) {
@@ -235,7 +238,10 @@ public class MainFrame2 extends javax.swing.JPanel {
     }
 
     private void init() {
-        contentPanel.add(dashboard, BorderLayout.CENTER);
+        JScrollPane s = new JScrollPane();
+        s.setPreferredSize(new Dimension(1,500));
+        s.setViewportView(dashboard);
+        contentPanel.add(s, BorderLayout.CENTER);
     }
 
 

@@ -35,7 +35,7 @@ public class Header extends javax.swing.JPanel {
         reload = new javax.swing.JButton();
         logout = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 0, 51));
+        setBackground(new java.awt.Color(49, 55, 66));
         setPreferredSize(new java.awt.Dimension(1200, 50));
 
         currentTime.setForeground(new java.awt.Color(255, 255, 255));

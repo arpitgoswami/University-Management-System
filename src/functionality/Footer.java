@@ -28,7 +28,7 @@ public class Footer extends javax.swing.JPanel {
         seprator3 = new javax.swing.JSeparator();
         versionControl = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 0, 51));
+        setBackground(new java.awt.Color(49, 55, 66));
         setPreferredSize(new java.awt.Dimension(1200, 30));
 
         updateStatus.setForeground(new java.awt.Color(255, 255, 255));

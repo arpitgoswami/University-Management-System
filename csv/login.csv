@@ -1,0 +1,13 @@
+Role,Real Name,Role,Login Time,Status
+admin,John Doe,ADMIN,2022-01-01 08:00:00,Success
+faculty,Jane Smith,FACULTY,2022-01-01 08:15:00,Success
+student,Robert Johnson,STUDENT,2022-01-01 08:30:00,Failure
+admin,Alice Johnson,ADMIN,2022-01-02 09:00:00,Success
+faculty,Michael Davis,FACULTY,2022-01-02 09:15:00,Success
+student,Emily White,STUDENT,2022-01-02 09:30:00,Failure
+admin,David Brown,ADMIN,2022-01-03 10:00:00,Success
+faculty,Grace Miller,FACULTY,2022-01-03 10:15:00,Success
+student,Samuel Wilson,STUDENT,2022-01-03 10:30:00,Success
+admin,Olivia Anderson,ADMIN,2022-01-04 11:00:00,Success
+faculty,Liam Davis,FACULTY,2022-01-04 11:15:00,Failure
+student,Emma Robinson,STUDENT,2022-01-04 11:30:00,Success
