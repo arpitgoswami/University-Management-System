@@ -1,4 +1,4 @@
-package frames;
+package content;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import components.*;
@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
-public class MainFrame2 extends JPanel {
+public class Content extends JPanel {
 
     JScrollPane scrollPane = new JScrollPane();
     Dashboard dashboard = new Dashboard();
@@ -17,7 +17,7 @@ public class MainFrame2 extends JPanel {
     AttendanceManagement attendanceManagement = new AttendanceManagement();
     FeeManagement feeManagement = new FeeManagement();
 
-    public MainFrame2() {
+    public Content() {
         initComponents();
         init();
     }
@@ -52,7 +52,6 @@ public class MainFrame2 extends JPanel {
         dashboardBtn.setBackground(new java.awt.Color(29, 36, 43));
         dashboardBtn.setForeground(new java.awt.Color(255, 255, 255));
         dashboardBtn.setText("Dashboard");
-        dashboardBtn.setBorder(null);
         dashboardBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         dashboardBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,7 +62,6 @@ public class MainFrame2 extends JPanel {
         studentBtn.setBackground(new java.awt.Color(29, 36, 43));
         studentBtn.setForeground(new java.awt.Color(255, 255, 255));
         studentBtn.setText("Student Management");
-        studentBtn.setBorder(null);
         studentBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         studentBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,7 +72,6 @@ public class MainFrame2 extends JPanel {
         facultyBtn.setBackground(new java.awt.Color(29, 36, 43));
         facultyBtn.setForeground(new java.awt.Color(255, 255, 255));
         facultyBtn.setText("Faculty Management");
-        facultyBtn.setBorder(null);
         facultyBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         facultyBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,7 +82,6 @@ public class MainFrame2 extends JPanel {
         courseBtn.setBackground(new java.awt.Color(29, 36, 43));
         courseBtn.setForeground(new java.awt.Color(255, 255, 255));
         courseBtn.setText("Course Management");
-        courseBtn.setBorder(null);
         courseBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         courseBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,7 +92,6 @@ public class MainFrame2 extends JPanel {
         attendanceBtn.setBackground(new java.awt.Color(29, 36, 43));
         attendanceBtn.setForeground(new java.awt.Color(255, 255, 255));
         attendanceBtn.setText("Attendance Management");
-        attendanceBtn.setBorder(null);
         attendanceBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         attendanceBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,7 +102,6 @@ public class MainFrame2 extends JPanel {
         feeBtn.setBackground(new java.awt.Color(29, 36, 43));
         feeBtn.setForeground(new java.awt.Color(255, 255, 255));
         feeBtn.setText("Fee Management");
-        feeBtn.setBorder(null);
         feeBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         feeBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,7 +112,6 @@ public class MainFrame2 extends JPanel {
         settingBtn.setBackground(new java.awt.Color(38, 47, 56));
         settingBtn.setForeground(new java.awt.Color(255, 255, 255));
         settingBtn.setText("Settings");
-        settingBtn.setBorder(null);
         settingBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         settingBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -200,48 +193,37 @@ public class MainFrame2 extends JPanel {
     }// </editor-fold>
 
     private void dashboardBtnActionPerformed(java.awt.event.ActionEvent evt) {
-        scrollPane.setPreferredSize(new Dimension(1,200));
-        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setViewportView(dashboard);
-        contentPanel.add(scrollPane, BorderLayout.CENTER);
     }
 
     private void studentBtnActionPerformed(java.awt.event.ActionEvent evt) {
-        contentPanel.removeAll();
-        contentPanel.add(studentManagement, BorderLayout.CENTER);
+        scrollPane.setViewportView(studentManagement);
     }
 
     private void facultyBtnActionPerformed(java.awt.event.ActionEvent evt) {
-        contentPanel.removeAll();
-        contentPanel.add(facultyManagement, BorderLayout.CENTER);
+        scrollPane.setViewportView(facultyManagement);
     }
 
     private void courseBtnActionPerformed(java.awt.event.ActionEvent evt) {
-        contentPanel.removeAll();
-        contentPanel.add(courseManagement, BorderLayout.CENTER);
+        scrollPane.setViewportView(courseManagement);
     }
 
     private void attendanceBtnActionPerformed(java.awt.event.ActionEvent evt) {
-        contentPanel.removeAll();
-        contentPanel.add(attendanceManagement, BorderLayout.CENTER);
+        scrollPane.setViewportView(attendanceManagement);
     }
 
     private void feeBtnActionPerformed(java.awt.event.ActionEvent evt) {
-        contentPanel.removeAll();
-        contentPanel.add(feeManagement, BorderLayout.CENTER);
+        scrollPane.setViewportView(feeManagement);
     }
 
     private void settingBtnActionPerformed(java.awt.event.ActionEvent evt) {
-        contentPanel.removeAll();
-        contentPanel.add(dashboard, BorderLayout.CENTER);
-        contentPanel.setSize(200, 400);
+        scrollPane.setViewportView(dashboard);
     }
 
     private void init() {
-        JScrollPane s = new JScrollPane();
-        s.setPreferredSize(new Dimension(1,500));
-        s.setViewportView(dashboard);
-        contentPanel.add(s, BorderLayout.CENTER);
+        scrollPane.setPreferredSize(new Dimension(1,500));
+        scrollPane.setViewportView(dashboard);
+        contentPanel.add(scrollPane, BorderLayout.CENTER);
     }
 
 

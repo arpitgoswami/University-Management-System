@@ -1,4 +1,4 @@
-package functionality;
+package content;
 
 import frames.LoginFrame;
 import frames.MainFrame;

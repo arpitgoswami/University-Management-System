@@ -2,8 +2,9 @@ package frames;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
-import functionality.Footer;
-import functionality.Header;
+import content.Content;
+import content.Footer;
+import content.Header;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,12 +16,12 @@ public class MainFrame extends JFrame {
     public MainFrame() {
         setTitle("University Management System");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setSize(1200, 800);
+        setSize(1350, 800);
         setLocationRelativeTo(null);
 
         setLayout(new BorderLayout());
-        MainFrame2 mainFrame2 = new MainFrame2();
-        add(mainFrame2, BorderLayout.CENTER);
+        Content content = new Content();
+        add(content, BorderLayout.CENTER);
 
         // Create functionalities.Header
         Header header = new Header();
@@ -73,7 +74,7 @@ public class MainFrame extends JFrame {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main() {
         SwingUtilities.invokeLater(() -> {
             new MainFrame().setVisible(true);
         });
