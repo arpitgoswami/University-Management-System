@@ -118,7 +118,7 @@ public class LoginFrame {
             MainFrame mainFrame = new MainFrame();
             roleStatus = role;
             userName = username;
-            mainFrame.main();
+            //mainFrame.main();
             loginFrame.dispose();
         } else {
             showError("Invalid login credentials");
