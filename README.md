@@ -12,4 +12,4 @@ This Java management project is a small-scale application developed using Java t
 [![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
 
 ## Application Screenshot
-![Screenshot 2024-01-31 174458](https://github.com/arpitgoswami/java-app/assets/71710858/6acef456-da8e-419b-8845-08a4f80c21af)
+![Screenshot 2024-02-01 181507](https://github.com/arpitgoswami/java-app/assets/71710858/8a0e967d-172b-49a7-bf99-9b8b538514c0)
