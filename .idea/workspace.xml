@@ -6,8 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="fb63453f-e9e5-42be-b924-543e99b4744c" name="Changes" comment="Development Commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SVGicon.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frames/LoginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/LoginFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frames/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frames/MainFrame2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/Content.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/functionality/Footer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/Footer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/functionality/Header.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/Header.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +68,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.MainFrame">
+  <component name="RunManager" selected="Application.Login">
     <configuration name="Login" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="frames.LoginFrame" />
       <module name="Simple" />
